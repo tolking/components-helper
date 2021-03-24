@@ -1,0 +1,26 @@
+{
+  "name": "components-helper",
+  "version": "1.0.0",
+  "description": "Based on the docs to provide code prompt files for vue component library",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "dev": "tsc -w",
+    "build": "tsc",
+    "test": "node test/index.js"
+  },
+  "files": ["lib"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tolking/components-helper.git"
+  },
+  "author": "tolking <qw13131wang@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tolking/components-helper/issues"
+  },
+  "homepage": "https://github.com/tolking/components-helper#readme",
+  "devDependencies": {
+    "typescript": "^4.2.3"
+  }
+}
