@@ -17,11 +17,11 @@ export default function parse(file: string) {
 }
 
 function parseTable(str: string) {
-  const tableHeader = str.match(RegSplitTable) // [_, title, header, columns]
+  const tableHeader = str.match(RegSplitTable)
   const title = tableHeader ? tableHeader[1] : undefined
   const header = tableHeader ? parseColumn(tableHeader[2]) : undefined
   const columns = tableHeader ? tableHeader[3] : undefined
-  let content = [] as unknown as Record<string, string>[]
+  let content = [] as Record<string, string>[]
 
   if (header && columns) {
     content = parseColumns(header, columns)
