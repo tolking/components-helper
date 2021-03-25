@@ -48,5 +48,8 @@
   },
   "lint-staged": {
     "*.{ts,js}": "eslint --fix"
+  },
+  "dependencies": {
+    "fast-glob": "^3.2.5"
   }
 }

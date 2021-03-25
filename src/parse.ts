@@ -1,6 +1,6 @@
-import type { Options } from './type'
+import type { Options, ParseData, ParseTable, ParseTableColumn } from './type'
 
-function parse(options: Required<Options>, file: string) {
+function parse(options: Required<Options>, file: string): ParseData {
   const { titleRegExp, tableRegExp } = options
   const _file = normalizeFile(file)
   const titleContent = _file.match(new RegExp(titleRegExp))
@@ -14,17 +14,20 @@ function parse(options: Required<Options>, file: string) {
   }
 }
 
-function parseTable(regExp: string, str: string) {
+function parseTable(regExp: string, str: string): ParseTable {
   const tableHeader = str.match(new RegExp(regExp))
   const title = tableHeader ? tableHeader[1] : undefined
   const header = tableHeader ? parseColumn(tableHeader[2]) : undefined
   const columns = tableHeader ? tableHeader[3] : undefined
-  let content = [] as Record<string, string>[]
+  let content = [] as ParseTableColumn[]
 
   if (header && columns) {
     content = parseColumns(header, columns)
   }
-  console.log(content)
+  console.log({
+    title,
+    content,
+  })
 
   return {
     title,
@@ -53,7 +56,7 @@ function parseColumns(header: string[], str: string) {
     const item = list[i]
 
     if (item) {
-      const column = {} as Record<string, string>
+      const column = {} as ParseTableColumn
 
       parseColumn(item).forEach((element, index) => {
         const key = header[index]

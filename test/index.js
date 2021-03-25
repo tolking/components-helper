@@ -2,6 +2,6 @@ const helper = require('../lib/index')
 
 helper({
   name: 'test',
-  entry: './*.md',
+  entry: 'test/*.md',
   outDir: '../dist',
 })

@@ -2,6 +2,7 @@ import ts from 'rollup-plugin-typescript2'
 
 const commonConf = {
   input: './src/index.ts',
+  external: ['fast-glob'],
   plugins:[
     ts({
       extensions: ['.ts'],
