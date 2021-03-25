@@ -5,12 +5,14 @@ function parse(options: Required<Options>, file: string): ParseData {
   const _file = normalizeFile(file)
   const titleContent = _file.match(new RegExp(titleRegExp))
   const tableContent = _file.match(new RegExp(tableRegExp, 'g'))
-  const table = tableContent ? tableContent.map(item => parseTable(tableRegExp, item)) : undefined
+  const table = tableContent
+    ? tableContent.map((item) => parseTable(tableRegExp, item))
+    : undefined
 
   return {
     title: titleContent ? titleContent[1] : undefined,
     description: titleContent ? titleContent[2] : undefined,
-    table
+    table,
   }
 }
 
@@ -24,10 +26,6 @@ function parseTable(regExp: string, str: string): ParseTable {
   if (header && columns) {
     content = parseColumns(header, columns)
   }
-  console.log({
-    title,
-    content,
-  })
 
   return {
     title,
@@ -35,9 +33,9 @@ function parseTable(regExp: string, str: string): ParseTable {
   }
 }
 
-function parseColumn(str: string) {
+function parseColumn(str: string): string[] {
   const list = str.split('|')
-  let column = []
+  const column = []
 
   for (let i = 0; i < list.length; i++) {
     const item = list[i].trim()
@@ -48,9 +46,9 @@ function parseColumn(str: string) {
   return column
 }
 
-function parseColumns(header: string[], str: string) {
+function parseColumns(header: string[], str: string): ParseTableColumn[] {
   const list = str.split('\n')
-  let columns = []
+  const columns = [] as ParseTableColumn[]
 
   for (let i = 0; i < list.length; i++) {
     const item = list[i]
@@ -73,7 +71,7 @@ function parseColumns(header: string[], str: string) {
   return columns
 }
 
-function normalizeFile(file: string) {
+function normalizeFile(file: string): string {
   return file.replace(/\r\n/g, '\n')
 }
 

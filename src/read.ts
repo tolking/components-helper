@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs'
 
-function read(path: string) {
+function read(path: string): string {
   return readFileSync(path, 'utf-8')
 }
 
