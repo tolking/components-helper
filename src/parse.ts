@@ -1,13 +1,11 @@
-const RegTitle = /#+\s+(.*)\n+([^(#|\n)]*)/
-const TableRegExp = '#+\\s*(.*)\\n+(\\|.+)\\n\\|\\s*-+.+\\n((\\|.+\\n)+)'
-const RegTable = new RegExp(TableRegExp, 'g')
-const RegSplitTable = new RegExp(TableRegExp)
+import type { Options } from './type'
 
-export default function parse(file: string) {
+function parse(options: Required<Options>, file: string) {
+  const { titleRegExp, tableRegExp } = options
   const _file = normalizeFile(file)
-  const titleContent = _file.match(RegTitle)
-  const tableContent = _file.match(RegTable)
-  const table = tableContent ? tableContent.map(item => parseTable(item)) : undefined
+  const titleContent = _file.match(new RegExp(titleRegExp))
+  const tableContent = _file.match(new RegExp(tableRegExp, 'g'))
+  const table = tableContent ? tableContent.map(item => parseTable(tableRegExp, item)) : undefined
 
   return {
     title: titleContent ? titleContent[1] : undefined,
@@ -16,8 +14,8 @@ export default function parse(file: string) {
   }
 }
 
-function parseTable(str: string) {
-  const tableHeader = str.match(RegSplitTable)
+function parseTable(regExp: string, str: string) {
+  const tableHeader = str.match(new RegExp(regExp))
   const title = tableHeader ? tableHeader[1] : undefined
   const header = tableHeader ? parseColumn(tableHeader[2]) : undefined
   const columns = tableHeader ? tableHeader[3] : undefined
@@ -75,3 +73,5 @@ function parseColumns(header: string[], str: string) {
 function normalizeFile(file: string) {
   return file.replace(/\r\n/g, '\n')
 }
+
+export default parse
