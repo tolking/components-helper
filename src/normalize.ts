@@ -1,7 +1,7 @@
 import { Options, NormalizeData, ParseTable } from './type'
 
 function normalize(
-  options: Required<Options>,
+  options: Options,
   data: NormalizeData,
   path: string
 ): NormalizeData {

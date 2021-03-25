@@ -1,12 +1,12 @@
 import type { Options, ParseData, ParseTable, ParseTableColumn } from './type'
 
-function parse(options: Required<Options>, file: string): ParseData {
+function parse(options: Options, file: string): ParseData {
   const { titleRegExp, tableRegExp } = options
   const _file = normalizeFile(file)
   const titleContent = _file.match(new RegExp(titleRegExp))
   const tableContent = _file.match(new RegExp(tableRegExp, 'g'))
   const table = tableContent
-    ? tableContent.map((item) => parseTable(tableRegExp, item))
+    ? tableContent.map((item) => parseTable(options, item))
     : undefined
 
   return {
@@ -16,15 +16,16 @@ function parse(options: Required<Options>, file: string): ParseData {
   }
 }
 
-function parseTable(regExp: string, str: string): ParseTable {
-  const tableHeader = str.match(new RegExp(regExp))
+function parseTable(options: Options, str: string): ParseTable {
+  const { tableRegExp } = options
+  const tableHeader = str.match(new RegExp(tableRegExp))
   const title = tableHeader ? tableHeader[1] : undefined
   const header = tableHeader ? parseColumn(tableHeader[2]) : undefined
   const columns = tableHeader ? tableHeader[3] : undefined
   let content = [] as ParseTableColumn[]
 
   if (header && columns) {
-    content = parseColumns(header, columns)
+    content = parseColumns(options, header, columns)
   }
 
   return {
@@ -46,7 +47,8 @@ function parseColumn(str: string): string[] {
   return column
 }
 
-function parseColumns(header: string[], str: string): ParseTableColumn[] {
+function parseColumns(options: Options, header: string[], str: string): ParseTableColumn[] {
+  const { emptyRegExp } = options
   const list = str.split('\n')
   const columns = [] as ParseTableColumn[]
 
@@ -60,7 +62,7 @@ function parseColumns(header: string[], str: string): ParseTableColumn[] {
         const key = header[index]
 
         if (key) {
-          column[header[index]] = element
+          column[header[index]] = element.replace(new RegExp(emptyRegExp), '')
         }
       })
 

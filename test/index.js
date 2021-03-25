@@ -5,4 +5,5 @@ helper({
   name: 'test',
   entry: 'test/*.md',
   outDir: '../dist',
+  attributesOptions: 'Accepted Values',
 })
