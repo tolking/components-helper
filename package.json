@@ -3,13 +3,24 @@
   "version": "1.0.0",
   "description": "Based on the docs to provide code prompt files for vue component library",
   "main": "lib/index.js",
+  "module": "lib/index.es.js",
   "types": "lib/index.d.ts",
-  "scripts": {
-    "dev": "tsc -w",
-    "build": "tsc",
-    "test": "node test/index.js"
+  "exports": {
+    ".": {
+      "import": "./lib/index.es.js",
+      "require": "./lib/index.js"
+    }
   },
-  "files": ["lib"],
+  "scripts": {
+    "dev": "rollup -c rollup.config.js -w",
+    "build": "rollup -c rollup.config.js",
+    "test": "node test/index.js",
+    "lint": "eslint . --fix --ext .ts,.js --ignore-pattern \"/lib/\"",
+    "prettier": "prettier --write \"src/*.ts\" --ignore-unknown"
+  },
+  "files": [
+    "lib"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tolking/components-helper.git"
@@ -20,7 +31,25 @@
     "url": "https://github.com/tolking/components-helper/issues"
   },
   "homepage": "https://github.com/tolking/components-helper#readme",
+  "dependencies": {
+    "fast-glob": "^3.2.5"
+  },
   "devDependencies": {
+    "@types/node": "^14.14.35",
+    "@typescript-eslint/eslint-plugin": "^4.19.0",
+    "@typescript-eslint/parser": "^4.19.0",
+    "eslint": "^7.22.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "husky": "^4.3.6",
+    "lint-staged": "^10.5.4",
+    "prettier": "^2.2.1",
+    "rollup": "^2.42.3",
+    "rollup-plugin-typescript2": "^0.30.0",
     "typescript": "^4.2.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }

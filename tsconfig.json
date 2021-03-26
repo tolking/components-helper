@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module":"esnext",
+    "lib": ["ESNext"],
+    "outDir": "lib",
+    "strict": true,
+    "declaration": true,
+    "removeComments": true
+  }
+}
