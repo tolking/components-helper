@@ -47,7 +47,11 @@ function parseColumn(str: string): string[] {
   return column
 }
 
-function parseColumns(options: Options, header: string[], str: string): ParseTableColumn[] {
+function parseColumns(
+  options: Options,
+  header: string[],
+  str: string,
+): ParseTableColumn[] {
   const { emptyRegExp } = options
   const list = str.split('\n')
   const columns = [] as ParseTableColumn[]

@@ -1,13 +1,6 @@
-type ReComponentName = (
-  title: string,
-  fileName: string,
-  path: string,
-) => string
+type ReComponentName = (title: string, fileName: string, path: string) => string
 
-type ReDocUrl = (
-  fileName: string,
-  header?: string,
-) => string
+type ReDocUrl = (fileName: string, header?: string) => string
 
 interface OptionsConfig {
   entry: string
@@ -31,6 +24,7 @@ export interface Config {
   propsType: string
   propsDescription: string
   propsOptions: string
+  propsDefault: string
   separator: string
   events: string
   eventsName: string

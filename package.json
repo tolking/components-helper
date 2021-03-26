@@ -40,7 +40,7 @@
     "@typescript-eslint/parser": "^4.19.0",
     "eslint": "^7.22.0",
     "eslint-plugin-prettier": "^3.3.1",
-    "husky": "^5.2.0",
+    "husky": "^4.3.6",
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
     "rollup": "^2.42.3",
@@ -51,8 +51,5 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  },
-  "lint-staged": {
-    "*.{ts,js}": "[eslint --fix, prettier --write]"
   }
 }

@@ -1,4 +1,4 @@
-import { Options, ParseData,NormalizeData, ParseTable } from './type'
+import type { Options, ParseData, NormalizeData, ParseTable } from './type'
 
 function normalize(
   options: Options,
@@ -97,7 +97,7 @@ function setData({
     if (!data.children) {
       data.children = [childItem]
     } else {
-      const child = data.children.find(item => item.title === childTitle)
+      const child = data.children.find((item) => item.title === childTitle)
 
       if (child) {
         child[key] = item
