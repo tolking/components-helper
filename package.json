@@ -16,7 +16,7 @@
     "build": "rollup -c rollup.config.js",
     "test": "node test/index.js",
     "lint": "eslint . --fix --ext .ts,.js --ignore-pattern \"/lib/\"",
-    "prettier": "prettier --check --write --ignore-unknown \"src/\""
+    "prettier": "prettier --write \"src/*.ts\" --ignore-unknown"
   },
   "files": [
     "lib"

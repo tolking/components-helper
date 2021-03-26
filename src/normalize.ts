@@ -3,7 +3,7 @@ import { Options, NormalizeData, ParseTable } from './type'
 function normalize(
   options: Options,
   data: NormalizeData,
-  path: string
+  path: string,
 ): NormalizeData {
   if (!data.table || !data.table.length) return data
   const { fileNameRegExp, attributes, events, slots, directives } = options
@@ -98,7 +98,7 @@ function setData({
     if (!data.children) {
       data.children = [childItem]
     } else {
-      const child = data.children.find((item) => item.title === childTitle)
+      const child = data.children.find(item => item.title === childTitle)
 
       if (child) {
         child[key] = item

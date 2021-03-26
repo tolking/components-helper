@@ -1,4 +1,8 @@
-type ReComponentName = (title: string, fileName?: string, path?: string) => string
+type ReComponentName = (
+  title: string,
+  fileName?: string,
+  path?: string,
+) => string
 
 interface OptionsConfig {
   entry: string
