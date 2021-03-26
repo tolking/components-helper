@@ -19,7 +19,7 @@ function parse(options: Options, file: string): ParseData {
 function parseTable(options: Options, str: string): ParseTable {
   const { tableRegExp } = options
   const tableHeader = str.match(new RegExp(tableRegExp))
-  const title = tableHeader ? tableHeader[1] : undefined
+  const title = tableHeader ? tableHeader[1] : ''
   const header = tableHeader ? parseColumn(tableHeader[2]) : undefined
   const columns = tableHeader ? tableHeader[3] : undefined
   let content = [] as ParseTableColumn[]

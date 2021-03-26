@@ -5,6 +5,8 @@ import read from './read'
 import parse from './parse'
 import normalize from './normalize'
 import vetur from './vetur'
+import webTypes from './webTypes'
+import write from './write'
 import type { InstallOptions, Options } from './type'
 
 const main = (options = {} as InstallOptions): void => {
@@ -17,8 +19,11 @@ const main = (options = {} as InstallOptions): void => {
     return content
   })
   const { tags, attributes } = vetur(_options, data)
+  const webTypesData = webTypes(_options, data)
 
-  console.log(tags, attributes)
+  write(_options, 'tags', tags)
+  write(_options, 'attributes', attributes)
+  write(_options, 'webTypes', webTypesData)
 }
 
 export default main

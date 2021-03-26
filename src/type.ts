@@ -1,33 +1,47 @@
 type ReComponentName = (
   title: string,
-  fileName?: string,
-  path?: string,
+  fileName: string,
+  path: string,
+) => string
+
+type ReDocUrl = (
+  fileName: string,
+  header?: string,
 ) => string
 
 interface OptionsConfig {
   entry: string
   outDir: string
-  prefix?: string
-  reComponentName?: ReComponentName
   name: string
-  version: number
-  docs?: string
+  version: string
+  reComponentName?: ReComponentName
+  reDocUrl?: ReDocUrl
 }
 
 export interface Config {
+  tags: string
+  attributes: string
+  webTypes: string
   titleRegExp: string
   tableRegExp: string
   fileNameRegExp: string
   emptyRegExp: string
-  attributes: string
-  attributesProp: string
-  attributesType: string
-  attributesDescription: string
-  attributesOptions: string
+  props: string
+  propsName: string
+  propsType: string
+  propsDescription: string
+  propsOptions: string
   separator: string
   events: string
+  eventsName: string
+  eventsDescription: string
   slots: string
+  slotsName: string
+  slotsDescription: string
   directives: string
+  directivesName: string
+  directivesType: string
+  directivesDescription: string
 }
 
 export type InstallOptions = OptionsConfig & Partial<Config>
@@ -37,7 +51,7 @@ export type Options = OptionsConfig & Config
 export type ParseTableColumn = Record<string, string>
 
 export interface ParseTable {
-  title?: string
+  title: string
   content: ParseTableColumn[]
 }
 
@@ -48,9 +62,9 @@ export interface ParseData {
 }
 
 export interface NormalizeData extends ParseData {
-  path?: string
-  fileName?: string
-  attributes?: ParseTable
+  path: string
+  fileName: string
+  props?: ParseTable
   events?: ParseTable
   slots?: ParseTable
   directives?: ParseTable
@@ -59,15 +73,72 @@ export interface NormalizeData extends ParseData {
 
 export interface Tags {
   [key: string]: {
-    attributes: string[]
+    props: string[]
     description?: string
   }
 }
 
-export interface Attributes {
+export interface Props {
   [key: string]: {
     type?: string
     options?: string[]
     description?: string
+  }
+}
+
+export interface WebEvent {
+  name: string
+  description?: string
+  'doc-url'?: string
+}
+
+export interface WebSlot {
+  name: string
+  description?: string
+  'doc-url'?: string
+}
+
+export interface WebAttribute {
+  name: string
+  description?: string
+  'doc-url'?: string
+  default?: string
+  value?: {
+    type: string
+    kind: string
+  }
+}
+
+export interface WebTag {
+  name: string
+  description?: string
+  'doc-url'?: string
+  attributes?: WebAttribute[]
+  events?: WebEvent[]
+  slots?: WebSlot[]
+}
+
+export interface WebDirective {
+  name: string
+  description?: string
+  'doc-url'?: string
+  value?: {
+    type: string
+    kind: string
+  }
+}
+
+export interface WebTypes {
+  $schema: string
+  framework: string
+  name: string
+  version: string
+  contributions: {
+    html: {
+      'types-syntax': string
+      'description-markup': string
+      tags: WebTag[]
+      attributes: WebDirective[]
+    }
   }
 }

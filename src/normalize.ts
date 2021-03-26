@@ -1,40 +1,39 @@
-import { Options, NormalizeData, ParseTable } from './type'
+import { Options, ParseData,NormalizeData, ParseTable } from './type'
 
 function normalize(
   options: Options,
-  data: NormalizeData,
+  data: ParseData,
   path: string,
 ): NormalizeData {
-  if (!data.table || !data.table.length) return data
-  const { fileNameRegExp, attributes, events, slots, directives } = options
+  const { fileNameRegExp, props, events, slots, directives } = options
   const _path = path.match(new RegExp(fileNameRegExp))
-  const fileName = _path ? _path[1] : undefined
-  const _attributes = new RegExp(attributes, 'i')
+  const fileName = _path ? _path[1] : ''
+  const _data: NormalizeData = Object.assign(data, { path, fileName })
+  const _props = new RegExp(props, 'i')
   const _events = new RegExp(events, 'i')
   const _slots = new RegExp(slots, 'i')
   const _directives = new RegExp(directives, 'i')
 
-  data.path = path
-  data.fileName = fileName
+  if (!_data.table || !_data.table.length) return _data
 
-  for (let i = 0; i < data.table.length; i++) {
-    const item = data.table[i]
+  for (let i = 0; i < _data.table.length; i++) {
+    const item = _data.table[i]
     const title = item.title
     if (!title) continue
 
-    if (_attributes.test(title)) {
+    if (_props.test(title)) {
       setData({
-        data,
+        data: _data,
         item,
         path,
         fileName,
         title,
-        key: 'attributes',
-        regExp: _attributes,
+        key: 'props',
+        regExp: _props,
       })
     } else if (_events.test(title)) {
       setData({
-        data,
+        data: _data,
         item,
         path,
         fileName,
@@ -44,7 +43,7 @@ function normalize(
       })
     } else if (_slots.test(title)) {
       setData({
-        data,
+        data: _data,
         item,
         path,
         fileName,
@@ -54,7 +53,7 @@ function normalize(
       })
     } else if (_directives.test(title)) {
       setData({
-        data,
+        data: _data,
         item,
         path,
         fileName,
@@ -65,7 +64,7 @@ function normalize(
     }
   }
 
-  return data
+  return _data
 }
 
 function setData({
@@ -78,11 +77,11 @@ function setData({
   regExp,
 }: {
   data: NormalizeData
-  key: 'attributes' | 'events' | 'slots' | 'directives'
+  key: 'props' | 'events' | 'slots' | 'directives'
   item: ParseTable
   title: string
   path: string
-  fileName?: string
+  fileName: string
   regExp: RegExp
 }) {
   const childTitle = title.replace(regExp, '').trim()
