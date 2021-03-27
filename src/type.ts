@@ -2,6 +2,8 @@ type ReComponentName = (title: string, fileName: string, path: string) => string
 
 type ReDocUrl = (fileName: string, header?: string) => string
 
+type ReAttribute = (str: string) => string | undefined
+
 interface OptionsConfig {
   entry: string
   outDir: string
@@ -9,6 +11,7 @@ interface OptionsConfig {
   version: string
   reComponentName?: ReComponentName
   reDocUrl?: ReDocUrl
+  reAttribute?: ReAttribute
 }
 
 export interface Config {
@@ -18,7 +21,6 @@ export interface Config {
   titleRegExp: string
   tableRegExp: string
   fileNameRegExp: string
-  emptyRegExp: string
   props: string
   propsName: string
   propsType: string
@@ -42,7 +44,7 @@ export type InstallOptions = OptionsConfig & Partial<Config>
 
 export type Options = OptionsConfig & Config
 
-export type ParseTableColumn = Record<string, string>
+export type ParseTableColumn = Record<string, string | undefined>
 
 export interface ParseTable {
   title: string

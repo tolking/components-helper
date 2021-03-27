@@ -87,7 +87,7 @@ function getWebTypes(options: Options, list: NormalizeData[]) {
           default: item[propsDefault],
           value: item[propsType]
             ? {
-                type: item[propsType],
+                type: item[propsType] as string,
                 kind: 'expression',
               }
             : undefined,
@@ -129,7 +129,7 @@ function getWebTypes(options: Options, list: NormalizeData[]) {
           'doc-url': getDocUrl(options, fileName, directives?.title),
           value: item[directivesType]
             ? {
-                type: item[directivesType],
+                type: item[directivesType] as string,
                 kind: 'expression',
               }
             : undefined,
@@ -140,7 +140,7 @@ function getWebTypes(options: Options, list: NormalizeData[]) {
     tagsList.push({
       name,
       description,
-      'doc-url': getDocUrl(options, fileName),
+      'doc-url': getDocUrl(options, fileName, title),
       attributes: propsList,
       events: eventsList,
       slots: slotsList,

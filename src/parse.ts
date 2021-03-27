@@ -1,3 +1,4 @@
+import { isFunction } from './utils'
 import type { Options, ParseData, ParseTable, ParseTableColumn } from './type'
 
 function parse(options: Options, file: string): ParseData {
@@ -18,10 +19,10 @@ function parse(options: Options, file: string): ParseData {
 
 function parseTable(options: Options, str: string): ParseTable {
   const { tableRegExp } = options
-  const tableHeader = str.match(new RegExp(tableRegExp))
-  const title = tableHeader ? tableHeader[1] : ''
-  const header = tableHeader ? parseColumn(tableHeader[2]) : undefined
-  const columns = tableHeader ? tableHeader[3] : undefined
+  const tableContent = str.match(new RegExp(tableRegExp))
+  const title = tableContent ? tableContent[1] : ''
+  const header = tableContent ? parseColumn(tableContent[2]) : undefined
+  const columns = tableContent ? tableContent[3] : undefined
   let content = [] as ParseTableColumn[]
 
   if (header && columns) {
@@ -52,7 +53,7 @@ function parseColumns(
   header: string[],
   str: string,
 ): ParseTableColumn[] {
-  const { emptyRegExp } = options
+  const { reAttribute } = options
   const list = str.split('\n')
   const columns = [] as ParseTableColumn[]
 
@@ -66,7 +67,7 @@ function parseColumns(
         const key = header[index]
 
         if (key) {
-          column[header[index]] = element.replace(new RegExp(emptyRegExp), '')
+          column[key] = isFunction(reAttribute) ? reAttribute(element) : element
         }
       })
 

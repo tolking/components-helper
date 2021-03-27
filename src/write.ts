@@ -8,7 +8,7 @@ function write(
   data: Tags | Props | WebTypes,
 ): void {
   const path = join(options.outDir, options[type]).replace(/\\/, '/')
-  const buffer = JSON.stringify(data, null, 2)
+  const buffer = JSON.stringify(data)
 
   writeFileRecursive(path, buffer)
 }

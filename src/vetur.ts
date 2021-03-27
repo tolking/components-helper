@@ -51,12 +51,13 @@ function vetur(
       if (_item) {
         const _name = name + '/' + _item
         const _options = item[propsOptions]
-          .split(separator)
-          .map((item) => item.trim())
+        const _optionsList = _options
+          ? _options.split(separator).map((item) => item.trim())
+          : undefined
 
         tagsProps.push(_item)
         propsList[_name] = {
-          options: _options.length && _options[0] ? _options : undefined,
+          options: _optionsList,
           type: item[propsType],
           description: reDescription(
             options,
@@ -85,7 +86,7 @@ function vetur(
 
     tagsList[name] = {
       props: tagsProps,
-      description: reDescription(options, fileName, description),
+      description: reDescription(options, fileName, description, title),
     }
   }
 
