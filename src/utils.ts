@@ -1,11 +1,11 @@
 import type { Options } from './type'
 
-function hyphenate(str: string) {
+export function hyphenate(str: string): string {
   return str.replace(/\B([A-Z])/g, '-$1').toLowerCase()
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-function isFunction(val: unknown): val is Function {
+export function isFunction(val: unknown): val is Function {
   return typeof val === 'function'
 }
 

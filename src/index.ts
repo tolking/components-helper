@@ -10,6 +10,12 @@ import write from './write'
 import type { InstallOptions, Options } from './type'
 
 const main = (options = {} as InstallOptions): void => {
+  if (!options.entry)
+    throw new Error('entry must be a string (non empty) or an array of strings')
+  if (!options.outDir) throw new Error('outDir must be a string (non empty)')
+  if (!options.name) console.warn('missing property "name"')
+  if (!options.version) console.warn('missing property "version"')
+
   const _options: Options = Object.assign(config, options)
   const files: string[] = fg.sync(_options.entry)
   const data = files.map((path) => {

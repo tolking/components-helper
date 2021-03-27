@@ -8,7 +8,6 @@ const config: Config = {
   tableRegExp:
     '#+\\s+(.*)\\n+(\\|?.+\\|.+)\\n\\|?\\s*:?-+:?\\s*\\|.+\\n((\\|?.+\\|.+\\n)+)',
   fileNameRegExp: '\\/((\\w|-)+)\\.\\w+$',
-  emptyRegExp: '^(-|—)',
   props: 'props',
   propsName: 'Name',
   propsType: 'Type',
