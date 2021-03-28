@@ -88,7 +88,7 @@ rewriting the doc url of the component library
 
 ### reAttribute
 
-- Type: `(str: string) => string | undefined`
+- Type: `(value: string, key: string) => string | undefined`
 
 rewriting the attribute of the component
 
@@ -306,6 +306,10 @@ by default matches all table, Optimize it through tableRegExp. For example: `#+\
 | ------ |
 | column |
 ```
+
+### other
+
+- When this docs not included the primary title or `Props` `Events` `Slots` and `Directives`, this component are not created.
 
 ## License
 

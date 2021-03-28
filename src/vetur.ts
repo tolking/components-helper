@@ -85,7 +85,7 @@ function vetur(
     })
 
     tagsList[name] = {
-      props: tagsProps,
+      attributes: tagsProps,
       description: reDescription(options, fileName, description, title),
     }
   }
@@ -104,10 +104,10 @@ function reDescription(
   let str = description || ''
 
   if (defaultVal) {
-    str += `${str ? str + ', ' : ''}default: ${defaultVal}`
+    str += `${str ? ', ' : ''}default: ${defaultVal}.`
   }
   if (docUrl) {
-    str += `${str ? str + '\n\n' : ''}[Docs](${docUrl})`
+    str += `${str ? '\n\n' : ''}[Docs](${docUrl})`
   }
 
   return str ? str : undefined

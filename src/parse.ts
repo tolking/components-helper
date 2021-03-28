@@ -11,8 +11,8 @@ function parse(options: Options, file: string): ParseData {
     : undefined
 
   return {
-    title: titleContent ? titleContent[1] : undefined,
-    description: titleContent ? titleContent[2] : undefined,
+    title: titleContent ? titleContent[1].trim() : undefined,
+    description: titleContent ? titleContent[2].trim() : undefined,
     table,
   }
 }
@@ -63,11 +63,13 @@ function parseColumns(
     if (item) {
       const column = {} as ParseTableColumn
 
-      parseColumn(item).forEach((element, index) => {
+      parseColumn(item).forEach((value, index) => {
         const key = header[index]
 
         if (key) {
-          column[key] = isFunction(reAttribute) ? reAttribute(element) : element
+          column[key] = isFunction(reAttribute)
+            ? reAttribute(value, key)
+            : value
         }
       })
 
