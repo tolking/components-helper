@@ -68,13 +68,31 @@ function getWebTypes(options: Options, list: NormalizeData[]) {
     const eventsList = [] as WebEvent[]
     const slotsList = [] as WebSlot[]
 
+    _directives.forEach((item) => {
+      const _item = item[directivesName]
+
+      if (_item) {
+        directivesList.push({
+          name: _item,
+          description: item[directivesDescription],
+          'doc-url': getDocUrl(options, fileName, directives?.title),
+          value: item[directivesType]
+            ? {
+                type: item[directivesType] as string,
+                kind: 'expression',
+              }
+            : undefined,
+        })
+      }
+    })
+
     if (children && children.length) {
       const child = getWebTypes(options, children)
       tagsList = tagsList.concat(child.tags)
       directivesList = directivesList.concat(child.attributes)
     }
     // Abandon the current data when missing the name or content
-    if (!name || (!props && !events && !slots && !directives)) continue
+    if (!name || (!props && !events && !slots)) continue
 
     _props.forEach((item) => {
       const _item = item[propsName]
@@ -115,24 +133,6 @@ function getWebTypes(options: Options, list: NormalizeData[]) {
           name: _item,
           description: item[slotsDescription],
           'doc-url': getDocUrl(options, fileName, slots?.title),
-        })
-      }
-    })
-
-    _directives.forEach((item) => {
-      const _item = item[directivesName]
-
-      if (_item) {
-        directivesList.push({
-          name: _item,
-          description: item[directivesDescription],
-          'doc-url': getDocUrl(options, fileName, directives?.title),
-          value: item[directivesType]
-            ? {
-                type: item[directivesType] as string,
-                kind: 'expression',
-              }
-            : undefined,
         })
       }
     })

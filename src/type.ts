@@ -2,7 +2,7 @@ type ReComponentName = (title: string, fileName: string, path: string) => string
 
 type ReDocUrl = (fileName: string, header?: string) => string
 
-type ReAttribute = (str: string) => string | undefined
+type ReAttribute = (value: string, key: string) => string | undefined
 
 interface OptionsConfig {
   entry: string
@@ -69,7 +69,7 @@ export interface NormalizeData extends ParseData {
 
 export interface Tags {
   [key: string]: {
-    props: string[]
+    attributes: string[]
     description?: string
   }
 }
