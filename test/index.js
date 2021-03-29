@@ -27,6 +27,7 @@ function reDocUrl(fileName, header) {
 
 function reAttribute(str) {
   switch (str) {
+    case '':
     case '-':
     case '—':
       return undefined

@@ -25,6 +25,17 @@
     "type": "git",
     "url": "git+https://github.com/tolking/components-helper.git"
   },
+  "keywords": [
+    "vue",
+    "components",
+    "component library",
+    "helper",
+    "vetur",
+    "webstrom",
+    "tags",
+    "attributes",
+    "web-types"
+  ],
   "author": "tolking <qw13131wang@gmail.com>",
   "license": "MIT",
   "bugs": {

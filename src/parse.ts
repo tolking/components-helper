@@ -36,16 +36,7 @@ function parseTable(options: Options, str: string): ParseTable {
 }
 
 function parseColumn(str: string): string[] {
-  const list = str.split('|')
-  const column = []
-
-  for (let i = 0; i < list.length; i++) {
-    const item = list[i].trim()
-
-    item && column.push(item)
-  }
-
-  return column
+  return str.replace(/^\|/, '').replace(/\|$/, '').split('|').map(item => item.trim())
 }
 
 function parseColumns(

@@ -50,15 +50,16 @@ function vetur(
 
       if (_item) {
         const _name = name + '/' + _item
+        const _type = item[propsType] || ''
         const _options = item[propsOptions]
-        const _optionsList = _options
+        const _optionsList = /string/i.test(_type) && _options
           ? _options.split(separator).map((item) => item.trim())
           : undefined
 
         tagsProps.push(_item)
         propsList[_name] = {
-          options: _optionsList,
           type: item[propsType],
+          options: _optionsList,
           description: reDescription(
             options,
             fileName,

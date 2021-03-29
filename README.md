@@ -76,7 +76,7 @@ version of the component library
 
 - Type: `(title: string, fileName: string, path: string) => string`
 
-rewriting the name of the component library
+rewriting the name of the component
 
 For example: `(title) => 'prefix-' + title.replace(/\B([A-Z])/g, '-$1').toLowerCase()`
 
@@ -84,7 +84,7 @@ For example: `(title) => 'prefix-' + title.replace(/\B([A-Z])/g, '-$1').toLowerC
 
 - Type: `(fileName: string, header?: string) => string`
 
-rewriting the doc url of the component library
+rewriting the doc url of the component
 
 ### reAttribute
 
@@ -269,7 +269,9 @@ description
 ## title
 ```
 
-matches other formats, For example: `#+\\s+(.*)\\n+>\s*([^(#|\\n)]*)`
+matches other formats
+
+For example: `#+\\s+(.*)\\n+>\\s*([^(#|\\n)]*)`
 
 ``` md
 # title
@@ -297,7 +299,9 @@ matches the format information in the docs
 | column |
 ```
 
-by default matches all table, Optimize it through tableRegExp. For example: `#+\\s+(.*\s*(Props|Events|Slots|Directives))\\n+(\\|?.+\\|.+)\\n\\|?\\s*:?-+:?\\s*\\|.+\\n((\\|?.+\\|.+\\n)+)`
+by default matches all table, Optimize it through tableRegExp
+
+For example: `#+\\s+(.*\\s*Props|.*\\s*Events|.*\\s*Slots|.*\\s*Directives)\\s*\\n+(\\|?.+\\|.+)\\n\\|?\\s*:?-+:?\\s*\\|.+\\n((\\|?.+\\|.+\\n)+)`
 
 ``` md
 ### Props | Events | Slots | Directives
@@ -307,6 +311,13 @@ by default matches all table, Optimize it through tableRegExp. For example: `#+\
 | column |
 ```
 
+``` md
+### sub-component Props
+
+| header |
+| ------ |
+| column |
+```
 ### other
 
 - When this docs not included the primary title or `Props` `Events` `Slots` and `Directives`, this component are not created.
