@@ -242,7 +242,7 @@ matches the title and description information from docs
 ### tableRegExp
 
 - Type: `string` (**This is a regular string.**)
-- Default: `#+\\s+(.*)\\n+(\\|?.+\\|.+)\\n\\|?\\s*:?-+:?\\s*\\|.+\\n((\\|?.+\\|.+\\n)+)`
+- Default: `#+\\s+(.*)\\n+(\\|?.+\\|.+)\\n\\|?\\s*:?-+:?\\s*\\|.+((\\n\\|?.+\\|.+)+)`
 
 matches the title and table header and table content information from docs
 
@@ -259,65 +259,74 @@ matches the file name from path
 
 matches the first format information in the docs
 
-``` md
-# title
+#+\\\\s+(<span class="yellow">.\*</span>)\\\\n+(<span class="aqua">[^(#|\\\\n)]\*</span>)
 
-description
-```
+<pre>
+# <span class="yellow">title</span>
 
-``` md
-## title
-```
+<span class="aqua">description</span>
+</pre>
 
-matches other formats
+<pre>
+## <span class="yellow">title</span>
+</pre>
 
-For example: `#+\\s+(.*)\\n+>\\s*([^(#|\\n)]*)`
+matches other formats, For example:
 
-``` md
-# title
+#+\\\\s+(<span class="yellow">.\*</span>)\\n+>\\\\s\*(<span class="aqua">[^(#|\\\\n)]\*</span>)
 
-> description
-```
+<pre>
+# <span class="yellow">title</span>
+
+> <span class="aqua">description</span>
+</pre>
 
 ### about tableRegExp
 
 matches the format information in the docs
 
-``` md
-### title
+#+\\\\s+(<span class="yellow">.\*</span>)\\\\n+(<span class="aqua">\\\\|?.+\\\\|.+</span>)\\\\n\\\\|?\\\\s*:?-+:?\\\\s\*\\\\|.+(<span class="purple">(\\\\n\\\\|?.+\\\\|.+)+</span>)
 
-| header |
+<pre>
+### <span class="yellow">title</span>
+
+<span class="aqua">| header |</span>
 | ------ |
-| column |
-```
+<span class="purple">| column |</span>
+<span class="purple">| column |</span>
+</pre>
 
-``` md
-### sub-component title
+<pre>
+### <span class="yellow">sub-component title</span>
 
-| header |
+<span class="aqua">| header |</span>
+| :----- |
+<span class="purple">| column |</span>
+<span class="purple">| column |</span>
+</pre>
+
+by default matches all table, Optimize it through tableRegExp, For example:
+
+#+\\\\s+(<span class="yellow">.\*\\\\s\*Props|.\*\\\\s\*Events|.\*\\\\s\*Slots|.\*\\\\s\*Directives</span>)\\\\s\*\\\\n+(<span class="aqua">\\\\|?.+\\\\|.+</span>)\\\\n\\\\|?\\\\s*:?-+:?\\\\s\*\\\\|.+(<span class="purple">(\\\\n\\\\|?.+\\\\|.+)+</span>)
+
+<pre>
+### <span class="yellow">Props | Events | Slots | Directives</span>
+
+<span class="aqua">| header |</span>
 | ------ |
-| column |
-```
+<span class="purple">| column |</span>
+<span class="purple">| column |</span>
+</pre>
 
-by default matches all table, Optimize it through tableRegExp
+<pre>
+### <span class="yellow">sub-component Props</span>
 
-For example: `#+\\s+(.*\\s*Props|.*\\s*Events|.*\\s*Slots|.*\\s*Directives)\\s*\\n+(\\|?.+\\|.+)\\n\\|?\\s*:?-+:?\\s*\\|.+\\n((\\|?.+\\|.+\\n)+)`
-
-``` md
-### Props | Events | Slots | Directives
-
-| header |
+<span class="aqua">| header |</span>
 | ------ |
-| column |
-```
+<span class="purple">| column |</span>
+<span class="purple">| column |</span>
+</pre>
 
-``` md
-### sub-component Props
-
-| header |
-| ------ |
-| column |
-```
 ### other
 
 - When this docs not included the primary title or `Props` `Events` `Slots` and `Directives`, this component are not created.
@@ -325,3 +334,15 @@ For example: `#+\\s+(.*\\s*Props|.*\\s*Events|.*\\s*Slots|.*\\s*Directives)\\s*\
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)
+
+<style>
+.yellow {
+  color: #ee0;
+}
+.aqua {
+  color: #0ee;
+}
+.purple {
+  color: #e0e;
+}
+</style>
