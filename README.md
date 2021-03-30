@@ -259,73 +259,73 @@ matches the file name from path
 
 matches the first format information in the docs
 
-#+\\\\s+(<span class="yellow">.\*</span>)\\\\n+(<span class="aqua">[^(#|\\\\n)]\*</span>)
+#+\\\\s+(`.*`)\\\\n+(`[^(#|\\n)]*`)
 
-<pre>
-# <span class="yellow">title</span>
+<div>
+# <code>title</code>
+<div><code>description</code></div>
+</div>
 
-<span class="aqua">description</span>
-</pre>
+and
 
-<pre>
-## <span class="yellow">title</span>
-</pre>
+<div>
+## <code>title</code>
+</div>
 
 matches other formats, For example:
 
-#+\\\\s+(<span class="yellow">.\*</span>)\\n+>\\\\s\*(<span class="aqua">[^(#|\\\\n)]\*</span>)
+#+\\\\s+(`.*`)\\n+>\\\\s\*(`[^(#|\\n)]*`)
 
-<pre>
-# <span class="yellow">title</span>
-
-> <span class="aqua">description</span>
-</pre>
+<div>
+# <code>title</code>
+<div>> <code>description</code></div>
+</div>
 
 ### about tableRegExp
 
 matches the format information in the docs
 
-#+\\\\s+(<span class="yellow">.\*</span>)\\\\n+(<span class="aqua">\\\\|?.+\\\\|.+</span>)\\\\n\\\\|?\\\\s*:?-+:?\\\\s\*\\\\|.+(<span class="purple">(\\\\n\\\\|?.+\\\\|.+)+</span>)
+#+\\\\s+(`.*`)\\\\n+(`\\|?.+\\|.+`)\\\\n\\\\|?\\\\s*:?-+:?\\\\s\*\\\\|.+(`(\\n\\|?.+\\|.+)+`)
 
-<pre>
-### <span class="yellow">title</span>
+<div>
+### <code>title</code>
+<div><code>| header |</code></div>
+<div>| ------ |</div>
+<div><code>| column |</code></div>
+<div><code>| column |</code></div>
+</div>
 
-<span class="aqua">| header |</span>
-| ------ |
-<span class="purple">| column |</span>
-<span class="purple">| column |</span>
-</pre>
+and
 
-<pre>
-### <span class="yellow">sub-component title</span>
-
-<span class="aqua">| header |</span>
-| :----- |
-<span class="purple">| column |</span>
-<span class="purple">| column |</span>
-</pre>
+<div>
+### <code>sub-component title</code>
+<div><code>| header |</code></div>
+<div>| :----- |</div>
+<div><code>| column |</code></div>
+<div><code>| column |</code></div>
+</div>
 
 by default matches all table, Optimize it through tableRegExp, For example:
 
-#+\\\\s+(<span class="yellow">.\*\\\\s\*Props|.\*\\\\s\*Events|.\*\\\\s\*Slots|.\*\\\\s\*Directives</span>)\\\\s\*\\\\n+(<span class="aqua">\\\\|?.+\\\\|.+</span>)\\\\n\\\\|?\\\\s*:?-+:?\\\\s\*\\\\|.+(<span class="purple">(\\\\n\\\\|?.+\\\\|.+)+</span>)
+#+\\\\s+(`.*\\s*Props|.*\\s*Events|.*\\s*Slots|.*\\s*Directives`)\\\\s*\\\\n+(`\\|?.+\\|.+`)\\\\n\\\\|?\\\\s*:?-+:?\\\\s*\\\\|.+(`(\\n\\|?.+\\|.+)+`)
 
-<pre>
-### <span class="yellow">Props | Events | Slots | Directives</span>
+<div>
+### <code>Props | Events | Slots | Directives</code>
+<div><code>| header |</code></div>
+<div>| ------ |</div>
+<div><code>| column |</code></div>
+<div><code>| column |</code></div>
+</div>
 
-<span class="aqua">| header |</span>
-| ------ |
-<span class="purple">| column |</span>
-<span class="purple">| column |</span>
-</pre>
+and
 
-<pre>
-### <span class="yellow">sub-component Props</span>
-
-<span class="aqua">| header |</span>
-| ------ |
-<span class="purple">| column |</span>
-<span class="purple">| column |</span>
-</pre>
+<div>
+### <code>sub-component Props</code>
+<div><code>| header |</code></div>
+<div>| ------ |</div>
+<div><code>| column |</code></div>
+<div><code>| column |</code></div>
+</div>
 
 ### other
 
@@ -334,15 +334,3 @@ by default matches all table, Optimize it through tableRegExp, For example:
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)
-
-<style>
-.yellow {
-  color: #ee0;
-}
-.aqua {
-  color: #0ee;
-}
-.purple {
-  color: #e0e;
-}
-</style>
