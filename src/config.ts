@@ -6,7 +6,7 @@ const config: Config = {
   webTypes: 'web-types.json',
   titleRegExp: '#+\\s+(.*)\\n+([^(#|\\n)]*)',
   tableRegExp:
-    '#+\\s+(.*)\\n+(\\|?.+\\|.+)\\n\\|?\\s*:?-+:?\\s*\\|.+\\n((\\|?.+\\|.+\\n)+)',
+    '#+\\s+(.*)\\n+(\\|?.+\\|.+)\\n\\|?\\s*:?-+:?\\s*\\|.+((\\n\\|?.+\\|.+)+)',
   fileNameRegExp: '\\/((\\w|-)+)\\.\\w+$',
   props: 'props',
   propsName: 'Name',
