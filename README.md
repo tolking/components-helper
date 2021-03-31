@@ -88,7 +88,7 @@ rewriting the doc url of the component
 
 ### reAttribute
 
-- Type: `(value: string, key: string) => string | undefined`
+- Type: `(value: string, key: string, columns: string[], title: string) => string | undefined`
 
 rewriting the attribute of the component
 

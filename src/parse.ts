@@ -26,7 +26,7 @@ function parseTable(options: Options, str: string): ParseTable {
   let content = [] as ParseTableColumn[]
 
   if (header && columns) {
-    content = parseColumns(options, header, columns)
+    content = parseColumns(options, title, header, columns)
   }
 
   return {
@@ -46,6 +46,7 @@ function parseColumn(str: string): string[] {
 
 function parseColumns(
   options: Options,
+  title: string,
   header: string[],
   str: string,
 ): ParseTableColumn[] {
@@ -58,13 +59,14 @@ function parseColumns(
 
     if (item) {
       const column = {} as ParseTableColumn
+      const list = parseColumn(item)
 
-      parseColumn(item).forEach((value, index) => {
+      list.forEach((value, index) => {
         const key = header[index]
 
         if (key) {
           column[key] = isFunction(reAttribute)
-            ? reAttribute(value, key)
+            ? reAttribute(value, key, list, title)
             : value
         }
       })
