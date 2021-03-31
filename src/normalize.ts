@@ -91,6 +91,7 @@ function setData({
       path,
       fileName,
       title: childTitle,
+      description: childTitle === data.title ? data.description : undefined,
       [key]: item,
     }
 

@@ -2,7 +2,7 @@ type ReComponentName = (title: string, fileName: string, path: string) => string
 
 type ReDocUrl = (fileName: string, header?: string) => string
 
-type ReAttribute = (value: string, key: string) => string | undefined
+type ReAttribute = (value: string, key: string, columns: string[], title: string) => string | undefined
 
 interface OptionsConfig {
   entry: string
