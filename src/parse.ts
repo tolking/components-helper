@@ -36,7 +36,12 @@ function parseTable(options: Options, str: string): ParseTable {
 }
 
 function parseColumn(str: string): string[] {
-  return str.replace(/^\|/, '').replace(/\|$/, '').split('|').map(item => item.trim())
+  return str
+    .replace(/^\|/, '')
+    .replace(/\|$/, '')
+    .replace(/\|\|/g, '| |')
+    .split(/[^\\]\|/)
+    .map(item => item.trim())
 }
 
 function parseColumns(
