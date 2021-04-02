@@ -40,8 +40,9 @@ function parseColumn(str: string): string[] {
     .replace(/^\|/, '')
     .replace(/\|$/, '')
     .replace(/\|\|/g, '| |')
+    .replace(/\|\|/g, '| |')
     .split(/[^\\]\|/)
-    .map(item => item.trim())
+    .map((item) => item.trim())
 }
 
 function parseColumns(
