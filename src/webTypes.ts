@@ -1,4 +1,4 @@
-import { getComponentsName, getDocUrl } from './utils'
+import { getComponentsName, getDocUrl, checkArray } from './utils'
 import type {
   Options,
   NormalizeData,
@@ -88,8 +88,13 @@ function getWebTypes(options: Options, list: NormalizeData[]) {
 
     if (children && children.length) {
       const child = getWebTypes(options, children)
-      tagsList = tagsList.concat(child.tags)
-      directivesList = directivesList.concat(child.attributes)
+
+      if (child.tags) {
+        tagsList = tagsList.concat(child.tags)
+      }
+      if (child.attributes) {
+        directivesList = directivesList.concat(child.attributes)
+      }
     }
     // Abandon the current data when missing the name or content
     if (!name || (!props && !events && !slots)) continue
@@ -141,13 +146,16 @@ function getWebTypes(options: Options, list: NormalizeData[]) {
       name,
       description,
       'doc-url': getDocUrl(options, fileName, title),
-      attributes: propsList,
-      events: eventsList,
-      slots: slotsList,
+      attributes: checkArray(propsList),
+      events: checkArray(eventsList),
+      slots: checkArray(slotsList),
     })
   }
 
-  return { tags: tagsList, attributes: directivesList }
+  return {
+    tags: checkArray(tagsList),
+    attributes: checkArray(directivesList),
+  }
 }
 
 export default webTypes
