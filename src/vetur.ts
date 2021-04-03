@@ -1,4 +1,4 @@
-import { getComponentsName, getDocUrl } from './utils'
+import { getComponentsName, getDocUrl, checkArray } from './utils'
 import type { Options, NormalizeData, Tags, Props } from './type'
 
 function vetur(
@@ -52,9 +52,10 @@ function vetur(
         const _name = name + '/' + _item
         const _type = item[propsType] || ''
         const _options = item[propsOptions]
-        const _optionsList = /string/i.test(_type) && _options
-          ? _options.split(separator).map((item) => item.trim())
-          : undefined
+        const _optionsList =
+          /string/i.test(_type) && _options
+            ? _options.split(separator).map((item) => item.trim())
+            : undefined
 
         tagsProps.push(_item)
         propsList[_name] = {
@@ -86,7 +87,7 @@ function vetur(
     })
 
     tagsList[name] = {
-      attributes: tagsProps,
+      attributes: checkArray(tagsProps),
       description: reDescription(options, fileName, description, title),
     }
   }

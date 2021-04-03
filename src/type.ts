@@ -2,13 +2,19 @@ type ReComponentName = (title: string, fileName: string, path: string) => string
 
 type ReDocUrl = (fileName: string, header?: string) => string
 
-type ReAttribute = (value: string, key: string, columns: string[], title: string) => string | undefined
+type ReAttribute = (
+  value: string,
+  key: string,
+  columns: string[],
+  title: string,
+) => string | undefined
 
 interface OptionsConfig {
   entry: string
   outDir: string
   name: string
   version: string
+  space?: string | number
   reComponentName?: ReComponentName
   reDocUrl?: ReDocUrl
   reAttribute?: ReAttribute
@@ -69,7 +75,7 @@ export interface NormalizeData extends ParseData {
 
 export interface Tags {
   [key: string]: {
-    attributes: string[]
+    attributes?: string[]
     description?: string
   }
 }
@@ -133,8 +139,8 @@ export interface WebTypes {
     html: {
       'types-syntax': string
       'description-markup': string
-      tags: WebTag[]
-      attributes: WebDirective[]
+      tags?: WebTag[]
+      attributes?: WebDirective[]
     }
   }
 }

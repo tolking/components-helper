@@ -4,6 +4,10 @@ export function hyphenate(str: string): string {
   return str.replace(/\B([A-Z])/g, '-$1').toLowerCase()
 }
 
+export function checkArray<T extends Array<unknown>>(item: T): T | undefined {
+  return item && item.length ? item : undefined
+}
+
 // eslint-disable-next-line @typescript-eslint/ban-types
 export function isFunction(val: unknown): val is Function {
   return typeof val === 'function'
