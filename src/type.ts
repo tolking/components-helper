@@ -14,6 +14,7 @@ interface OptionsConfig {
   outDir: string
   name: string
   version: string
+  space?: string | number
   reComponentName?: ReComponentName
   reDocUrl?: ReDocUrl
   reAttribute?: ReAttribute

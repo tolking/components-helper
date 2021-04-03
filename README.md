@@ -92,6 +92,12 @@ rewriting the doc url of the component
 
 rewriting the attribute of the component
 
+### space
+
+- Type: `number` | `string`
+
+Adds indentation, white space, and line break characters to the return-value JSON text to make it easier to read
+
 ### tags
 
 - Type: `string`
