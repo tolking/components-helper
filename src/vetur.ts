@@ -82,7 +82,14 @@ function vetur(
         tagsProps.push(_item)
         propsList[_name] = {
           type: 'event',
-          description: item[eventsDescription],
+          description: reDescription(
+            options,
+            fileName,
+            item[eventsDescription],
+            events?.title,
+            item[propsDefault],
+            path,
+          ),
         }
       }
     })
