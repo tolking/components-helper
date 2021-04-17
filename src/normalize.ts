@@ -91,7 +91,12 @@ function setData({
       path,
       fileName,
       title: childTitle,
-      description: childTitle === data.title ? data.description : undefined,
+      description:
+        childTitle === data.title
+          ? data.description
+          : data.subTitles?.filter((v) => v.title === childTitle).length
+          ? data.subTitles?.filter((v) => v.title === childTitle)[0].description
+          : undefined,
       [key]: item,
     }
 

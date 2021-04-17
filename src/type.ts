@@ -61,6 +61,7 @@ export interface ParseData {
   title?: string
   description?: string
   table?: ParseTable[]
+  subTitles?: ParseData[]
 }
 
 export interface NormalizeData extends ParseData {

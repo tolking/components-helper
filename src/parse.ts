@@ -4,7 +4,27 @@ import type { Options, ParseData, ParseTable, ParseTableColumn } from './type'
 function parse(options: Options, file: string): ParseData {
   const { titleRegExp, tableRegExp } = options
   const _file = normalizeFile(file)
-  const titleContent = _file.match(new RegExp(titleRegExp))
+  const subTitles = []
+  const _titleRegExp = new RegExp(titleRegExp)
+  const titleContent = _file.match(_titleRegExp)
+  if (titleContent && titleContent.length > 0) {
+    let str = _file.substring(titleContent[0].length)
+    let doFlag = true
+    while (doFlag) {
+      const subTitleContent = str.match(_titleRegExp)
+      if (subTitleContent && subTitleContent.length > 0) {
+        subTitles.push({
+          title: subTitleContent ? subTitleContent[1].trim() : undefined,
+          description: subTitleContent ? subTitleContent[2].trim() : undefined,
+        })
+        str = str.substring(
+          (subTitleContent.index as number) + subTitleContent[0].length,
+        )
+      } else {
+        doFlag = false
+      }
+    }
+  }
   const tableContent = _file.match(new RegExp(tableRegExp, 'g'))
   const table = tableContent
     ? tableContent.map((item) => parseTable(options, item))
@@ -14,6 +34,7 @@ function parse(options: Options, file: string): ParseData {
     title: titleContent ? titleContent[1].trim() : undefined,
     description: titleContent ? titleContent[2].trim() : undefined,
     table,
+    subTitles,
   }
 }
 
