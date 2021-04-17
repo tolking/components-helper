@@ -14,6 +14,7 @@ const config: Config = {
   propsDescription: 'Description',
   propsOptions: 'Options',
   propsDefault: 'Default',
+  defaultValSeparators: [', ', '.'],
   separator: '/',
   events: 'events',
   eventsName: 'Name',

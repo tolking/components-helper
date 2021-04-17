@@ -33,6 +33,7 @@ export interface Config {
   propsDescription: string
   propsOptions: string
   propsDefault: string
+  defaultValSeparators: string[]
   separator: string
   events: string
   eventsName: string

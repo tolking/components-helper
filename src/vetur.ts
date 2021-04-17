@@ -120,9 +120,10 @@ function reDescription(
 ): string | undefined {
   const docUrl = getDocUrl(options, fileName, header, path)
   let str = description || ''
+  const separators = options.defaultValSeparators
 
   if (defaultVal) {
-    str += `${str ? ', ' : ''}default: ${defaultVal}.`
+    str += `${str ? separators[0] : ''}default: ${defaultVal}${separators[1]}`
   }
   if (docUrl) {
     str += `${str ? '\n\n' : ''}[Docs](${docUrl})`
