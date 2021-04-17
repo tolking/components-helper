@@ -1,6 +1,6 @@
 type ReComponentName = (title: string, fileName: string, path: string) => string
 
-type ReDocUrl = (fileName: string, header?: string) => string
+type ReDocUrl = (fileName: string, header?: string, path?: string) => string
 
 type ReAttribute = (
   value: string,

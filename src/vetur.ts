@@ -67,6 +67,7 @@ function vetur(
             item[propsDescription],
             props?.title,
             item[propsDefault],
+            path,
           ),
         }
       }
@@ -88,7 +89,14 @@ function vetur(
 
     tagsList[name] = {
       attributes: checkArray(tagsProps),
-      description: reDescription(options, fileName, description, title),
+      description: reDescription(
+        options,
+        fileName,
+        description,
+        title,
+        undefined,
+        path,
+      ),
     }
   }
 
@@ -101,8 +109,9 @@ function reDescription(
   description?: string,
   header?: string,
   defaultVal?: string,
+  path?: string,
 ): string | undefined {
-  const docUrl = getDocUrl(options, fileName, header)
+  const docUrl = getDocUrl(options, fileName, header, path)
   let str = description || ''
 
   if (defaultVal) {
