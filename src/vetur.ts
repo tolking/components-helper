@@ -96,6 +96,7 @@ function vetur(
 
     tagsList[name] = {
       attributes: checkArray(tagsProps),
+      subtags: options.subtagsMap[name],
       description: reDescription(
         options,
         fileName,

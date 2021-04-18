@@ -26,6 +26,7 @@ const config: Config = {
   directivesName: 'Name',
   directivesType: 'Type',
   directivesDescription: 'Description',
+  subtagsMap: {},
 }
 
 export default config

@@ -45,6 +45,7 @@ export interface Config {
   directivesName: string
   directivesType: string
   directivesDescription: string
+  subtagsMap: SubTagsMap
 }
 
 export type InstallOptions = OptionsConfig & Partial<Config>
@@ -78,6 +79,7 @@ export interface NormalizeData extends ParseData {
 export interface Tags {
   [key: string]: {
     attributes?: string[]
+    subtags?: string[]
     description?: string
   }
 }
@@ -145,4 +147,8 @@ export interface WebTypes {
       attributes?: WebDirective[]
     }
   }
+}
+
+export interface SubTagsMap {
+  [propName: string]: string[]
 }
