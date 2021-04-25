@@ -29,7 +29,8 @@ export function getDocUrl(
   options: Options,
   fileName: string,
   header?: string,
+  path?: string,
 ): string | undefined {
   const { reDocUrl } = options
-  return isFunction(reDocUrl) ? reDocUrl(fileName, header) : undefined
+  return isFunction(reDocUrl) ? reDocUrl(fileName, header, path) : undefined
 }
