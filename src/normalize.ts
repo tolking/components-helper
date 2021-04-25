@@ -87,16 +87,12 @@ function setData({
   const childTitle = title.replace(regExp, '').trim()
 
   if (childTitle) {
+    const childHeader = data.headers?.find((item) => item.title === childTitle)
     const childItem = {
       path,
       fileName,
       title: childTitle,
-      description:
-        childTitle === data.title
-          ? data.description
-          : data.subTitles?.filter((v) => v.title === childTitle).length
-          ? data.subTitles?.filter((v) => v.title === childTitle)[0].description
-          : undefined,
+      description: childHeader?.description,
       [key]: item,
     }
 
