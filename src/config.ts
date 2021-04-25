@@ -14,6 +14,7 @@ const config: Config = {
   propsDescription: 'Description',
   propsOptions: 'Options',
   propsDefault: 'Default',
+  defaultValSeparators: [', ', '.'],
   separator: '/',
   events: 'events',
   eventsName: 'Name',
@@ -25,6 +26,7 @@ const config: Config = {
   directivesName: 'Name',
   directivesType: 'Type',
   directivesDescription: 'Description',
+  subtagsMap: {},
 }
 
 export default config

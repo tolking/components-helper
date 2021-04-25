@@ -67,6 +67,7 @@ function vetur(
             item[propsDescription],
             props?.title,
             item[propsDefault],
+            path,
           ),
         }
       }
@@ -81,14 +82,29 @@ function vetur(
         tagsProps.push(_item)
         propsList[_name] = {
           type: 'event',
-          description: item[eventsDescription],
+          description: reDescription(
+            options,
+            fileName,
+            item[eventsDescription],
+            events?.title,
+            item[propsDefault],
+            path,
+          ),
         }
       }
     })
 
     tagsList[name] = {
       attributes: checkArray(tagsProps),
-      description: reDescription(options, fileName, description, title),
+      subtags: options.subtagsMap[name],
+      description: reDescription(
+        options,
+        fileName,
+        description,
+        title,
+        undefined,
+        path,
+      ),
     }
   }
 
@@ -101,12 +117,14 @@ function reDescription(
   description?: string,
   header?: string,
   defaultVal?: string,
+  path?: string,
 ): string | undefined {
-  const docUrl = getDocUrl(options, fileName, header)
+  const docUrl = getDocUrl(options, fileName, header, path)
   let str = description || ''
+  const separators = options.defaultValSeparators
 
   if (defaultVal) {
-    str += `${str ? ', ' : ''}default: ${defaultVal}.`
+    str += `${str ? separators[0] : ''}default: ${defaultVal}${separators[1]}`
   }
   if (docUrl) {
     str += `${str ? '\n\n' : ''}[Docs](${docUrl})`

@@ -75,7 +75,7 @@ function getWebTypes(options: Options, list: NormalizeData[]) {
         directivesList.push({
           name: _item,
           description: item[directivesDescription],
-          'doc-url': getDocUrl(options, fileName, directives?.title),
+          'doc-url': getDocUrl(options, fileName, directives?.title, path),
           value: item[directivesType]
             ? {
                 type: item[directivesType] as string,
@@ -106,7 +106,7 @@ function getWebTypes(options: Options, list: NormalizeData[]) {
         propsList.push({
           name: _item,
           description: item[propsDescription],
-          'doc-url': getDocUrl(options, fileName, props?.title),
+          'doc-url': getDocUrl(options, fileName, props?.title, path),
           default: item[propsDefault],
           value: item[propsType]
             ? {
@@ -125,7 +125,7 @@ function getWebTypes(options: Options, list: NormalizeData[]) {
         eventsList.push({
           name: _item,
           description: item[eventsDescription],
-          'doc-url': getDocUrl(options, fileName, events?.title),
+          'doc-url': getDocUrl(options, fileName, events?.title, path),
         })
       }
     })
@@ -137,7 +137,7 @@ function getWebTypes(options: Options, list: NormalizeData[]) {
         slotsList.push({
           name: _item,
           description: item[slotsDescription],
-          'doc-url': getDocUrl(options, fileName, slots?.title),
+          'doc-url': getDocUrl(options, fileName, slots?.title, path),
         })
       }
     })
@@ -145,7 +145,7 @@ function getWebTypes(options: Options, list: NormalizeData[]) {
     tagsList.push({
       name,
       description,
-      'doc-url': getDocUrl(options, fileName, title),
+      'doc-url': getDocUrl(options, fileName, title, path),
       attributes: checkArray(propsList),
       events: checkArray(eventsList),
       slots: checkArray(slotsList),

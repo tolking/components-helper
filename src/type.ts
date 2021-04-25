@@ -1,6 +1,6 @@
 type ReComponentName = (title: string, fileName: string, path: string) => string
 
-type ReDocUrl = (fileName: string, header?: string) => string
+type ReDocUrl = (fileName: string, header?: string, path?: string) => string
 
 type ReAttribute = (
   value: string,
@@ -33,6 +33,7 @@ export interface Config {
   propsDescription: string
   propsOptions: string
   propsDefault: string
+  defaultValSeparators: [string, string]
   separator: string
   events: string
   eventsName: string
@@ -44,11 +45,17 @@ export interface Config {
   directivesName: string
   directivesType: string
   directivesDescription: string
+  subtagsMap: SubTagsMap
 }
 
 export type InstallOptions = OptionsConfig & Partial<Config>
 
 export type Options = OptionsConfig & Config
+
+export interface ParseHeader {
+  title?: string
+  description?: string
+}
 
 export type ParseTableColumn = Record<string, string | undefined>
 
@@ -61,6 +68,7 @@ export interface ParseData {
   title?: string
   description?: string
   table?: ParseTable[]
+  headers?: ParseHeader[]
 }
 
 export interface NormalizeData extends ParseData {
@@ -76,6 +84,7 @@ export interface NormalizeData extends ParseData {
 export interface Tags {
   [key: string]: {
     attributes?: string[]
+    subtags?: string[]
     description?: string
   }
 }
@@ -143,4 +152,8 @@ export interface WebTypes {
       attributes?: WebDirective[]
     }
   }
+}
+
+export interface SubTagsMap {
+  [propName: string]: string[]
 }

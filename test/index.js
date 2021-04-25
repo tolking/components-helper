@@ -1,5 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const helper = require('../lib/index')
+const subtagsMap = {
+  'app-button-group': ['app-button'],
+}
 
 helper({
   name: 'test',
@@ -9,6 +12,7 @@ helper({
   reComponentName,
   reDocUrl,
   reAttribute,
+  subtagsMap,
   props: 'Attributes',
   propsName: 'Attribute',
   propsOptions: 'Accepted Values',
