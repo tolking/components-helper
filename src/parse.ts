@@ -4,27 +4,10 @@ import type { Options, ParseData, ParseTable, ParseTableColumn } from './type'
 function parse(options: Options, file: string): ParseData {
   const { titleRegExp, tableRegExp } = options
   const _file = normalizeFile(file)
-  const subTitles = []
-  const _titleRegExp = new RegExp(titleRegExp)
-  const titleContent = _file.match(_titleRegExp)
-  if (titleContent && titleContent.length > 0) {
-    let str = _file.substring(titleContent[0].length)
-    let doFlag = true
-    while (doFlag) {
-      const subTitleContent = str.match(_titleRegExp)
-      if (subTitleContent && subTitleContent.length > 0) {
-        subTitles.push({
-          title: subTitleContent ? subTitleContent[1].trim() : undefined,
-          description: subTitleContent ? subTitleContent[2].trim() : undefined,
-        })
-        str = str.substring(
-          (subTitleContent.index as number) + subTitleContent[0].length,
-        )
-      } else {
-        doFlag = false
-      }
-    }
-  }
+  const titleContent = _file.match(new RegExp(titleRegExp, 'g'))
+  const subTitles = titleContent
+    ? titleContent.map((item) => parseTitle(options, item))
+    : undefined
   const tableContent = _file.match(new RegExp(tableRegExp, 'g'))
   const table = tableContent
     ? tableContent.map((item) => parseTable(options, item))
@@ -98,6 +81,18 @@ function parseColumns(
   }
 
   return columns
+}
+
+function parseTitle(options: Options, str: string): ParseData {
+  const { titleRegExp } = options
+  const titleContent = str.match(new RegExp(titleRegExp))
+  const title = titleContent ? titleContent[1].trim() : undefined
+  const description = titleContent ? titleContent[2].trim() : undefined
+
+  return {
+    title,
+    description,
+  }
 }
 
 function normalizeFile(file: string): string {
