@@ -238,6 +238,21 @@ name for directives header description
 
 name for directives header type
 
+### defaultValSeparators
+
+- Type: `[string, string]`
+- Default: `[', ', '.']`
+
+config the punctuation of description for vetur
+
+### subtagsMap
+
+- Type: `Record<string, string[]>`
+
+config the subtags for vetur
+
+For example: `{ 'app-button-group': ['app-button'] }`
+
 ### titleRegExp
 
 - Type: `string` (**This is a regular string.**)
