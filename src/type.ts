@@ -9,6 +9,12 @@ type ReAttribute = (
   title: string,
 ) => string | undefined
 
+type ReVeturDescription = (
+  description?: string,
+  defaultValue?: string,
+  docUrl?: string,
+) => string
+
 interface OptionsConfig {
   entry: string
   outDir: string
@@ -18,6 +24,7 @@ interface OptionsConfig {
   reComponentName?: ReComponentName
   reDocUrl?: ReDocUrl
   reAttribute?: ReAttribute
+  reVeturDescription?: ReVeturDescription
 }
 
 export interface Config {
@@ -33,7 +40,6 @@ export interface Config {
   propsDescription: string
   propsOptions: string
   propsDefault: string
-  defaultValSeparators: [string, string]
   separator: string
   events: string
   eventsName: string
