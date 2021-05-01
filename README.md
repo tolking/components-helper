@@ -92,6 +92,13 @@ rewriting the doc url of the component
 
 rewriting the attribute of the component
 
+### reVeturDescription
+
+- Type: `(description?: string, defaultValue?: string, docUrl?: string) => string`
+- Default: same like `${description}, default: ${defaultValue}.\n\n[Docs](${docUrl})`
+
+rewriting the description of vetur
+
 ### space
 
 - Type: `number` | `string`
@@ -118,6 +125,13 @@ name for attributes of the vetur
 - Default: `web-types.json`
 
 name for web-types of the webstrom
+
+### separator
+
+- Type: `string`
+- Default: `/`
+
+the separator for propsOptions and slotsSubtags
 
 ### props
 
@@ -153,13 +167,6 @@ name for props header type
 - Default: `Options`
 
 name for props header options
-
-### separator
-
-- Type: `string`
-- Default: `/`
-
-name for props options separator
 
 ### propsDefault
 
@@ -210,6 +217,13 @@ name for slots header name
 
 name for slots header description
 
+### slotsSubtags
+
+- Type: `string`
+- Default: `Subtags`
+
+name for slots header subtags
+
 ### directives
 
 - Type: `string` (**This is a regular string and ignores case.**)
@@ -237,21 +251,6 @@ name for directives header description
 - Default: `Type`
 
 name for directives header type
-
-### defaultValSeparators
-
-- Type: `[string, string]`
-- Default: `[', ', '.']`
-
-config the punctuation of description for vetur
-
-### subtagsMap
-
-- Type: `Record<string, string[]>`
-
-config the subtags for vetur
-
-For example: `{ 'app-button-group': ['app-button'] }`
 
 ### titleRegExp
 
