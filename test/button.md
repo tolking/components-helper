@@ -34,6 +34,7 @@ Display multiple buttons as button groups
 
 ### ButtonGroup Slots
 
-| Name | Description |
-| ------ | ------------------ |
-| default  | customize button group content |
+| Name | Description | Subtags |
+| ------ | ------------------ | -- |
+| default  | customize button group content | Button / Test |
+| other | some other slots ||

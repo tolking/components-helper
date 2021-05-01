@@ -9,6 +9,12 @@ type ReAttribute = (
   title: string,
 ) => string | undefined
 
+type ReVeturDescription = (
+  description?: string,
+  defaultValue?: string,
+  docUrl?: string,
+) => string
+
 interface OptionsConfig {
   entry: string
   outDir: string
@@ -18,6 +24,7 @@ interface OptionsConfig {
   reComponentName?: ReComponentName
   reDocUrl?: ReDocUrl
   reAttribute?: ReAttribute
+  reVeturDescription?: ReVeturDescription
 }
 
 export interface Config {
@@ -33,7 +40,6 @@ export interface Config {
   propsDescription: string
   propsOptions: string
   propsDefault: string
-  defaultValSeparators: [string, string]
   separator: string
   events: string
   eventsName: string
@@ -41,11 +47,11 @@ export interface Config {
   slots: string
   slotsName: string
   slotsDescription: string
+  slotsSubtags: string
   directives: string
   directivesName: string
   directivesType: string
   directivesDescription: string
-  subtagsMap: SubTagsMap
 }
 
 export type InstallOptions = OptionsConfig & Partial<Config>
@@ -152,8 +158,4 @@ export interface WebTypes {
       attributes?: WebDirective[]
     }
   }
-}
-
-export interface SubTagsMap {
-  [propName: string]: string[]
 }
