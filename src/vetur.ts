@@ -17,8 +17,8 @@ function vetur(
     separator,
     eventsName,
     eventsDescription,
+    slotsSubtags,
     reVeturDescription,
-    subtagsMap,
   } = options
   const tagsList = {} as Tags
   const propsList = {} as Props
@@ -37,7 +37,9 @@ function vetur(
     const name = getComponentsName(options, title, fileName, path)
     const _props = props ? props.content : []
     const _events = events ? events.content : []
+    const _slots = slots ? slots.content : []
     const tagsProps: string[] = []
+    let subtags: string[] = []
 
     if (children && children.length) {
       const { tags, attributes } = vetur(options, children)
@@ -94,6 +96,17 @@ function vetur(
       }
     })
 
+    _slots.forEach((item) => {
+      const _subtags = item[slotsSubtags]
+      const _subtagsList = _subtags
+        ? _subtags.split(separator).map((item) => item.trim())
+        : undefined
+
+      if (_subtagsList) {
+        subtags = subtags.concat(_subtagsList)
+      }
+    })
+
     const docUrl = getDocUrl(options, fileName, events?.title, path)
     const _description = isFunction(reVeturDescription)
       ? reVeturDescription(description, undefined, docUrl)
@@ -101,7 +114,7 @@ function vetur(
 
     tagsList[name] = {
       attributes: checkArray(tagsProps),
-      subtags: subtagsMap[name],
+      subtags: checkArray(subtags),
       description: _description,
     }
   }

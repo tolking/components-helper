@@ -47,11 +47,11 @@ export interface Config {
   slots: string
   slotsName: string
   slotsDescription: string
+  slotsSubtags: string
   directives: string
   directivesName: string
   directivesType: string
   directivesDescription: string
-  subtagsMap: SubTagsMap
 }
 
 export type InstallOptions = OptionsConfig & Partial<Config>
@@ -158,8 +158,4 @@ export interface WebTypes {
       attributes?: WebDirective[]
     }
   }
-}
-
-export interface SubTagsMap {
-  [propName: string]: string[]
 }

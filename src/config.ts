@@ -21,11 +21,11 @@ const config: Config = {
   slots: 'slots',
   slotsName: 'Name',
   slotsDescription: 'Description',
+  slotsSubtags: 'Subtags',
   directives: 'directives',
   directivesName: 'Name',
   directivesType: 'Type',
   directivesDescription: 'Description',
-  subtagsMap: {},
 }
 
 export default config

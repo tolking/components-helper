@@ -1,8 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const helper = require('../lib/index')
-const subtagsMap = {
-  'app-button-group': ['app-button'],
-}
 
 helper({
   name: 'test',
@@ -12,7 +9,7 @@ helper({
   reComponentName,
   reDocUrl,
   reAttribute,
-  subtagsMap,
+  space: 2,
   props: 'Attributes',
   propsName: 'Attribute',
   propsOptions: 'Accepted Values',
@@ -29,7 +26,7 @@ function reDocUrl(fileName, header) {
   return docs + fileName + (_header ? '#' + header : '')
 }
 
-function reAttribute(str) {
+function reAttribute(str, key) {
   switch (str) {
     case '':
     case '-':
@@ -38,6 +35,13 @@ function reAttribute(str) {
     case 'v-model':
       return 'model-value'
     default:
-      return str
+      if (key === 'Subtags') {
+        return str
+          .split('/')
+          .map((name) => reComponentName(name.trim()))
+          .join('/')
+      } else {
+        return str
+      }
   }
 }
