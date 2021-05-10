@@ -82,7 +82,7 @@ For example: `(title) => 'prefix-' + title.replace(/\B([A-Z])/g, '-$1').toLowerC
 
 ### reDocUrl
 
-- Type: `(fileName: string, header?: string) => string`
+- Type: `(fileName: string, header?: string, path: string) => string`
 
 rewriting the doc url of the component
 
