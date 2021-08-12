@@ -1,6 +1,6 @@
 {
   "name": "components-helper",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Based on the docs to provide code prompt files for vue component library",
   "main": "lib/index.js",
   "module": "lib/index.es.js",
@@ -42,6 +42,9 @@
     "url": "https://github.com/tolking/components-helper/issues"
   },
   "homepage": "https://github.com/tolking/components-helper#readme",
+  "engines": {
+    "node": ">10.0.0"
+  },
   "dependencies": {
     "fast-glob": "^3.2.5"
   },

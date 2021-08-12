@@ -1,4 +1,9 @@
-import { getComponentsName, getDocUrl, checkArray, isFunction } from './utils'
+import {
+  getComponentsName,
+  getDocUrl,
+  getVeturDescription,
+  checkArray,
+} from './utils'
 import type { Options, NormalizeData, Tags, Props } from './type'
 
 function vetur(
@@ -18,7 +23,6 @@ function vetur(
     eventsName,
     eventsDescription,
     slotsSubtags,
-    reVeturDescription,
   } = options
   const tagsList = {} as Tags
   const propsList = {} as Props
@@ -61,13 +65,12 @@ function vetur(
           /string/i.test(_type) && _options
             ? _options.split(separator).map((item) => item.trim())
             : undefined
-        const _description = isFunction(reVeturDescription)
-          ? reVeturDescription(
-              item[propsDescription],
-              item[propsDefault],
-              docUrl,
-            )
-          : reDescription(item[propsDescription], item[propsDefault], docUrl)
+        const _description = getVeturDescription(
+          options,
+          item[propsDescription],
+          item[propsDefault],
+          docUrl,
+        )
 
         tagsProps.push(_item)
         propsList[_name] = {
@@ -84,9 +87,12 @@ function vetur(
       if (_item) {
         const docUrl = getDocUrl(options, fileName, events?.title, path)
         const _name = name + '/' + _item
-        const _description = isFunction(reVeturDescription)
-          ? reVeturDescription(item[eventsDescription], undefined, docUrl)
-          : reDescription(item[eventsDescription], undefined, docUrl)
+        const _description = getVeturDescription(
+          options,
+          item[eventsDescription],
+          undefined,
+          docUrl,
+        )
 
         tagsProps.push(_item)
         propsList[_name] = {
@@ -108,9 +114,12 @@ function vetur(
     })
 
     const docUrl = getDocUrl(options, fileName, events?.title, path)
-    const _description = isFunction(reVeturDescription)
-      ? reVeturDescription(description, undefined, docUrl)
-      : reDescription(description, undefined, docUrl)
+    const _description = getVeturDescription(
+      options,
+      description,
+      undefined,
+      docUrl,
+    )
 
     tagsList[name] = {
       attributes: checkArray(tagsProps),
@@ -120,23 +129,6 @@ function vetur(
   }
 
   return { tags: tagsList, attributes: propsList }
-}
-
-function reDescription(
-  description?: string,
-  defaultVal?: string,
-  docUrl?: string,
-): string | undefined {
-  let str = description || ''
-
-  if (defaultVal) {
-    str += `${str ? ', ' : ''}default: ${defaultVal}.`
-  }
-  if (docUrl) {
-    str += `${str ? '\n\n' : ''}[Docs](${docUrl})`
-  }
-
-  return str ? str : undefined
 }
 
 export default vetur

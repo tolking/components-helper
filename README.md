@@ -1,8 +1,8 @@
 # components-helper
 
-> Based on the docs to provide code prompt files for vue component library
+> Based on the documents to provide code prompt files for vue component library
 
-nodejs ^10
+Reference documents format reference test files
 
 ## Installation
 
@@ -41,19 +41,56 @@ then in package.json
 
 ## Options
 
-### entry (required)
+- [entry](#entry)
+- [outDir](#outdir)
+- [name](#name)
+- [version](#version)
+- [space](#space)
+- [separator](#separator)
+- [reComponentName](#recomponentname)
+- [reDocUrl](#redocurl)
+- [reAttribute](#reattribute)
+- [reVeturDescription](#reveturdescription)
+- [reWebTypesSource](#rewebtypessource)
+- [tags](#tags)
+- [attributes](#attributes)
+- [webTypes](#webtypes)
+- [props](#props)
+- [propsName](#propsname)
+- [propsDescription](#propsdescription)
+- [propsType](#propstype)
+- [propsOptions](#propsoptions)
+- [propsDefault](#propsdefault)
+- [events](#events)
+- [eventsName](#eventsname)
+- [eventsDescription](#eventsdescription)
+- [slots](#slots)
+- [slotsName](#slotsname)
+- [slotsDescription](#slotsdescription)
+- [slotsSubtags](#slotssubtags)
+- [directives](#directives)
+- [directivesName](#directivesname)
+- [directivesDescription](#directivesdescription)
+- [directivesType](#directivestype)
+- [titleRegExp](#titleregexp)
+- [tableRegExp](#tableregexp)
+- [fileNameRegExp](#filenameregexp)
 
+### entry
+
+- Required: `true`
 - Type: `string`
 
 entry path, refer: [fast-glob](https://github.com/mrmlnc/fast-glob#pattern-syntax)
 
-For example:
+for example:
   - `docs/*.md` -- matches all files in the docs
   - `docs/(a|b).md` -- matches files `a.md` and `b.md`
   - `docs/!(a|b).md` -- matches files except `a.md` and `b.md`
 
-### outDir (required)
+### outDir
 
+- Required: `true`
 - Type: `string`
 
 outDir path
@@ -62,33 +99,54 @@ For example: `lib`
 
 ### name
 
+- Required: `true`
 - Type: `string`
 
-name of the component library
+name of the component library. 
 
 ### version
 
+- Required: `true`
 - Type: `string`
 
-version of the component library
+version of the component library. 
+
+### space
+
+- Type: `number` | `string`
+
+Adds indentation, white space, and line break characters to the return-value JSON text to make it easier to read
+
+### separator
+
+- Type: `string`
+- Default: `/`
+
+the separator for propsOptions, slotsSubtags ...
 
 ### reComponentName
 
 - Type: `(title: string, fileName: string, path: string) => string`
+- Defult: `hyphenate(title || fileName)`
 
 rewriting the name of the component
 
-For example: `(title) => 'prefix-' + title.replace(/\B([A-Z])/g, '-$1').toLowerCase()`
+for example: `(title) => 'prefix-' + title.replace(/\B([A-Z])/g, '-$1').toLowerCase()`
 
 ### reDocUrl
 
-- Type: `(fileName: string, header?: string, path: string) => string`
+- Type: `(fileName: string, header?: string, path: string) => string | undefind`
 
 rewriting the doc url of the component
 
 ### reAttribute
 
-- Type: `(value: string, key: string, columns: string[], title: string) => string | undefined`
+- Type: `(value: string, key: string, row: string[], title: string) => string | undefined`
+
+- value: current value
+- key: the key value of the current column
+- row: all values of the current row
+- title: the title of current tabel
 
 rewriting the attribute of the component
 
@@ -99,11 +157,12 @@ rewriting the attribute of the component
 
 rewriting the description of vetur
 
-### space
+### reWebTypesSource
 
-- Type: `number` | `string`
+- Type: `ReWebTypesSource = (title: string, fileName: string, path: string) => { module?: string; symbol: string } | { file: string; offset: number }`
+- Default: `{ symbol: title }`
 
-Adds indentation, white space, and line break characters to the return-value JSON text to make it easier to read
+rewriting the source of web-types
 
 ### tags
 
@@ -125,13 +184,6 @@ name for attributes of the vetur
 - Default: `web-types.json`
 
 name for web-types of the webstrom
-
-### separator
-
-- Type: `string`
-- Default: `/`
-
-the separator for propsOptions and slotsSubtags
 
 ### props
 

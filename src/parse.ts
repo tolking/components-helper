@@ -32,7 +32,7 @@ function parseTable(options: Options, str: string): ParseTable {
   const { tableRegExp } = options
   const tableContent = str.match(new RegExp(tableRegExp))
   const title = tableContent ? tableContent[1] : ''
-  const header = tableContent ? parseColumn(tableContent[2]) : undefined
+  const header = tableContent ? parseRow(tableContent[2]) : undefined
   const columns = tableContent ? tableContent[3] : undefined
   let content = [] as ParseTableColumn[]
 
@@ -46,7 +46,7 @@ function parseTable(options: Options, str: string): ParseTable {
   }
 }
 
-function parseColumn(str: string): string[] {
+function parseRow(str: string): string[] {
   return str
     .replace(/^\|/, '')
     .replace(/\|$/, '')
@@ -71,7 +71,7 @@ function parseColumns(
 
     if (item) {
       const column = {} as ParseTableColumn
-      const list = parseColumn(item)
+      const list = parseRow(item)
 
       list.forEach((value, index) => {
         const key = header[index]
