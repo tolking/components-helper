@@ -113,7 +113,7 @@ function vetur(
       }
     })
 
-    const docUrl = getDocUrl(options, fileName, events?.title, path)
+    const docUrl = getDocUrl(options, fileName, title, path)
     const _description = getVeturDescription(
       options,
       description,
