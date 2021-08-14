@@ -9,21 +9,34 @@ helper({
   reComponentName,
   reDocUrl,
   reAttribute,
+  reWebTypesSource,
   space: 2,
-  props: 'Attributes',
-  propsName: 'Attribute',
-  propsOptions: 'Accepted Values',
-  eventsName: 'Event Name',
 })
 
 function reComponentName(title) {
-  return 'app-' + title.replace(/\B([A-Z])/g, '-$1').toLowerCase()
+  return (
+    'app-' +
+    title
+      .replace(/\B([A-Z])/g, '-$1')
+      .replace(/[ ]+/g, '-')
+      .toLowerCase()
+  )
+}
+
+function reWebTypesSource(title) {
+  const symbol =
+    'App' +
+    title
+      .replace(/-/, ' ')
+      .replace(/^\w|\s+\w/g, (item) => item.trim().toUpperCase())
+
+  return { symbol }
 }
 
 function reDocUrl(fileName, header) {
   const docs = 'https://you.components/docs/'
   const _header = header ? header.replace(/[ ]+/g, '-') : undefined
-  return docs + fileName + (_header ? '#' + header : '')
+  return docs + fileName + (_header ? '#' + _header : '')
 }
 
 function reAttribute(str, key) {
@@ -37,9 +50,11 @@ function reAttribute(str, key) {
     default:
       if (key === 'Subtags') {
         return str
-          .split('/')
-          .map((name) => reComponentName(name.trim()))
-          .join('/')
+          ? str
+              .split('/')
+              .map((name) => reComponentName(name.trim()))
+              .join('/')
+          : str
       } else {
         return str
       }

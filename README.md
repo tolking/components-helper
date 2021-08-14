@@ -4,6 +4,8 @@
 
 Reference documents format reference test files
 
+[Changelog](./CHANGELOG.md)
+
 ## Installation
 
 ``` sh
@@ -41,10 +43,10 @@ then in package.json
 
 ## Options
 
-- [entry](#entry)
-- [outDir](#outdir)
-- [name](#name)
-- [version](#version)
+- [entry (required)](#entry)
+- [outDir (required)](#outdir)
+- [name (required)](#name)
+- [version (required)](#version)
 - [space](#space)
 - [separator](#separator)
 - [reComponentName](#recomponentname)
@@ -122,7 +124,7 @@ Adds indentation, white space, and line break characters to the return-value JSO
 - Type: `string`
 - Default: `/`
 
-the separator for propsOptions, slotsSubtags ...
+the separator for propsOptions, slotsSubtags, type ...
 
 ### reComponentName
 
@@ -143,6 +145,8 @@ rewriting the doc url of the component
 
 - Type: `(value: string, key: string, row: string[], title: string) => string | undefined`
 
+##### arg
+
 - value: current value
 - key: the key value of the current column
 - row: all values of the current row
@@ -159,10 +163,10 @@ rewriting the description of vetur
 
 ### reWebTypesSource
 
-- Type: `ReWebTypesSource = (title: string, fileName: string, path: string) => { module?: string; symbol: string } | { file: string; offset: number }`
+- Type: `(title: string, fileName: string, path: string) => { module?: string; symbol: string } | { file: string; offset: number }`
 - Default: `{ symbol: title }`
 
-rewriting the source of web-types
+rewriting the source of web-types. (the name of export from conmonents library)
 
 ### tags
 
