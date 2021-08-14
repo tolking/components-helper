@@ -1,6 +1,10 @@
 type ReComponentName = (title: string, fileName: string, path: string) => string
 
-type ReDocUrl = (fileName: string, header?: string, path?: string) => string
+type ReDocUrl = (
+  fileName: string,
+  header?: string,
+  path?: string,
+) => string | undefined
 
 type ReAttribute = (
   value: string,
@@ -13,7 +17,13 @@ type ReVeturDescription = (
   description?: string,
   defaultValue?: string,
   docUrl?: string,
-) => string
+) => string | undefined
+
+type ReWebTypesSource = (
+  title: string,
+  fileName: string,
+  path: string,
+) => Source
 
 interface OptionsConfig {
   entry: string
@@ -25,6 +35,7 @@ interface OptionsConfig {
   reDocUrl?: ReDocUrl
   reAttribute?: ReAttribute
   reVeturDescription?: ReVeturDescription
+  reWebTypesSource?: ReWebTypesSource
 }
 
 export interface Config {
@@ -34,13 +45,13 @@ export interface Config {
   titleRegExp: string
   tableRegExp: string
   fileNameRegExp: string
+  separator: string
   props: string
   propsName: string
   propsType: string
   propsDescription: string
   propsOptions: string
   propsDefault: string
-  separator: string
   events: string
   eventsName: string
   eventsDescription: string
@@ -126,8 +137,19 @@ export interface WebAttribute {
   }
 }
 
+export type Source =
+  | {
+      module?: string
+      symbol: string
+    }
+  | {
+      file: string
+      offset: number
+    }
+
 export interface WebTag {
   name: string
+  source: Source
   description?: string
   'doc-url'?: string
   attributes?: WebAttribute[]
@@ -137,6 +159,7 @@ export interface WebTag {
 
 export interface WebDirective {
   name: string
+  source: Source
   description?: string
   'doc-url'?: string
   value?: {

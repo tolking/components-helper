@@ -1,4 +1,9 @@
-import { getComponentsName, getDocUrl, checkArray } from './utils'
+import {
+  getComponentsName,
+  getDocUrl,
+  getWebTypesSource,
+  checkArray,
+} from './utils'
 import type {
   Options,
   NormalizeData,
@@ -15,7 +20,8 @@ function webTypes(options: Options, list: NormalizeData[]): WebTypes {
   const { tags, attributes } = getWebTypes(options, list)
 
   return {
-    $schema: 'http://json.schemastore.org/web-types',
+    $schema:
+      'https://raw.githubusercontent.com/JetBrains/web-types/master/schema/web-types.json',
     framework: 'vue',
     name,
     version,
@@ -74,6 +80,7 @@ function getWebTypes(options: Options, list: NormalizeData[]) {
       if (_item) {
         directivesList.push({
           name: _item,
+          source: getWebTypesSource(options, title, fileName, path),
           description: item[directivesDescription],
           'doc-url': getDocUrl(options, fileName, directives?.title, path),
           value: item[directivesType]
@@ -144,6 +151,7 @@ function getWebTypes(options: Options, list: NormalizeData[]) {
 
     tagsList.push({
       name,
+      source: getWebTypesSource(options, title, fileName, path),
       description,
       'doc-url': getDocUrl(options, fileName, title, path),
       attributes: checkArray(propsList),
