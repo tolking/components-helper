@@ -1,4 +1,4 @@
-import { join } from 'path'
+import { resolve } from 'path'
 import { mkdir, writeFileSync } from 'fs'
 import type { Options, Tags, Props, WebTypes } from './type'
 
@@ -7,7 +7,7 @@ function write(
   type: 'tags' | 'attributes' | 'webTypes',
   data: Tags | Props | WebTypes,
 ): void {
-  const path = join(options.outDir, options[type]).replace(/\\/, '/')
+  const path = resolve(options.outDir, options[type])
   const buffer = JSON.stringify(data, null, options.space)
 
   writeFileRecursive(path, buffer)
