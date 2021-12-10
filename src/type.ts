@@ -1,31 +1,35 @@
-type ReComponentName = (title: string, fileName: string, path: string) => string
+export type ReComponentName = (
+  title: string,
+  fileName: string,
+  path: string,
+) => string
 
-type ReDocUrl = (
+export type ReDocUrl = (
   fileName: string,
   header?: string,
   path?: string,
 ) => string | undefined
 
-type ReAttribute = (
+export type ReAttribute = (
   value: string,
   key: string,
   columns: string[],
   title: string,
 ) => string | undefined
 
-type ReVeturDescription = (
+export type ReVeturDescription = (
   description?: string,
   defaultValue?: string,
   docUrl?: string,
 ) => string | undefined
 
-type ReWebTypesSource = (
+export type ReWebTypesSource = (
   title: string,
   fileName: string,
   path: string,
 ) => Source
 
-interface OptionsConfig {
+export interface OptionsConfig {
   entry: string
   outDir: string
   name: string

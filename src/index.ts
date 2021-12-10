@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const fg = require('fast-glob')
+import fg from 'fast-glob'
 import config from './config'
 import read from './read'
 import parse from './parse'
@@ -32,5 +31,6 @@ const main = (options = {} as InstallOptions): void => {
   write(_options, 'webTypes', webTypesData)
 }
 
+export * from './type'
 export default main
 module.exports = main
