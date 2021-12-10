@@ -1,5 +1,15 @@
 # Changelog
 
+### 1.0.5
+
+feat
+
+- export all types
+
+fix
+
+- support windows path
+
 ### 1.0.4
 
 feat

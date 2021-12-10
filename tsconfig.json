@@ -4,8 +4,9 @@
     "module":"esnext",
     "lib": ["ESNext"],
     "outDir": "lib",
+    "moduleResolution": "Node",
     "strict": true,
     "declaration": true,
-    "removeComments": true
+    "allowSyntheticDefaultImports": true
   }
 }
