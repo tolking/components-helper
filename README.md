@@ -43,6 +43,10 @@ then in package.json
 
 ## Options
 
+<details>
+<summary>TOC</summary>
+<br>
+
 - [entry (required)](#entry)
 - [outDir (required)](#outdir)
 - [name (required)](#name)
@@ -77,6 +81,9 @@ then in package.json
 - [titleRegExp](#titleregexp)
 - [tableRegExp](#tableregexp)
 - [fileNameRegExp](#filenameregexp)
+
+<br>
+</details>
 
 ### entry
 
