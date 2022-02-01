@@ -1,4 +1,4 @@
-import { isFunction, isString } from './utils'
+import { isFunction, isString, normalizeFile } from './utils'
 import type {
   Options,
   ParseData,
@@ -7,7 +7,7 @@ import type {
   ParseTableColumn,
 } from './type'
 
-function parse(options: Options, file: string): ParseData {
+export function parse(options: Options, file: string): ParseData {
   const _file = normalizeFile(file)
   const headers = parseTitle(options, _file)
   const topHeader = headers && headers.length ? headers[0] : undefined
@@ -21,7 +21,7 @@ function parse(options: Options, file: string): ParseData {
   }
 }
 
-function parseTitle(options: Options, str: string): ParseHeader[] {
+export function parseTitle(options: Options, str: string): ParseHeader[] {
   const { titleRegExp } = options
   const _titleRegExp = isString(titleRegExp)
     ? new RegExp(titleRegExp, 'g')
@@ -34,7 +34,7 @@ function parseTitle(options: Options, str: string): ParseHeader[] {
   }))
 }
 
-function parseTable(options: Options, str: string): ParseTable[] {
+export function parseTable(options: Options, str: string): ParseTable[] {
   const { tableRegExp } = options
   const _tableRegExp = isString(tableRegExp)
     ? new RegExp(tableRegExp, 'g')
@@ -54,7 +54,7 @@ function parseTable(options: Options, str: string): ParseTable[] {
   })
 }
 
-function parseRow(str: string): string[] {
+export function parseRow(str: string): string[] {
   return str
     .replace(/^\|/, '')
     .replace(/\|$/, '')
@@ -64,7 +64,7 @@ function parseRow(str: string): string[] {
     .map((item) => item.replace(/\\\|/g, '|').trim())
 }
 
-function parseColumns(
+export function parseColumns(
   options: Options,
   title: string,
   header: string[],
@@ -97,9 +97,3 @@ function parseColumns(
 
   return columns
 }
-
-function normalizeFile(file: string): string {
-  return file.replace(/\r\n/g, '\n')
-}
-
-export default parse

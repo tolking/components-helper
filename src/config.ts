@@ -1,6 +1,6 @@
 import type { Config } from './type'
 
-const config: Config = {
+export const config: Config = {
   tags: 'tags.json',
   attributes: 'attributes.json',
   webTypes: 'web-types.json',
@@ -26,5 +26,3 @@ const config: Config = {
   directivesType: 'Type',
   directivesDescription: 'Description',
 }
-
-export default config

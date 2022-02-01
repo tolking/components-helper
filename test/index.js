@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const helper = require('../lib/index')
+const helper = require('../lib/index').default
 
 helper({
   name: 'test',

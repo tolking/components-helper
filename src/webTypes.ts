@@ -15,7 +15,7 @@ import type {
   WebSlot,
 } from './type'
 
-function webTypes(options: Options, list: NormalizeData[]): WebTypes {
+export function webTypes(options: Options, list: NormalizeData[]): WebTypes {
   const { name, version } = options
   const { tags, attributes } = getWebTypes(options, list)
 
@@ -36,7 +36,7 @@ function webTypes(options: Options, list: NormalizeData[]): WebTypes {
   }
 }
 
-function getWebTypes(options: Options, list: NormalizeData[]) {
+export function getWebTypes(options: Options, list: NormalizeData[]) {
   const {
     propsName,
     propsType,
@@ -165,5 +165,3 @@ function getWebTypes(options: Options, list: NormalizeData[]) {
     attributes: checkArray(directivesList),
   }
 }
-
-export default webTypes

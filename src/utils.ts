@@ -17,6 +17,10 @@ export function isFunction(val: unknown): val is Function {
   return typeof val === 'function'
 }
 
+export function normalizeFile(file: string): string {
+  return file.replace(/\r\n/g, '\n')
+}
+
 export function getComponentsName(
   options: Options,
   title = '',

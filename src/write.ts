@@ -2,7 +2,7 @@ import { resolve } from 'path'
 import { mkdir, writeFileSync } from 'fs'
 import type { Options, Tags, Props, WebTypes } from './type'
 
-function write(
+export function write(
   options: Options,
   type: 'tags' | 'attributes' | 'webTypes',
   data: Tags | Props | WebTypes,
@@ -20,5 +20,3 @@ function writeFileRecursive(path: string, buffer: string) {
     writeFileSync(path, buffer)
   })
 }
-
-export default write
