@@ -1,3 +1,4 @@
+import { isString } from './utils'
 import type { Options, ParseData, NormalizeData, ParseTable } from './type'
 
 function normalize(
@@ -6,7 +7,10 @@ function normalize(
   path: string,
 ): NormalizeData {
   const { fileNameRegExp, props, events, slots, directives } = options
-  const _path = path.match(new RegExp(fileNameRegExp))
+  const _fileNameRegExp = isString(fileNameRegExp)
+    ? new RegExp(fileNameRegExp)
+    : fileNameRegExp
+  const _path = path.match(_fileNameRegExp)
   const fileName = _path ? _path[1] : ''
   const _data: NormalizeData = Object.assign(data, { path, fileName })
   const _props = new RegExp(props, 'i')

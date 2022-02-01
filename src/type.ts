@@ -46,9 +46,9 @@ export interface Config {
   tags: string
   attributes: string
   webTypes: string
-  titleRegExp: string
-  tableRegExp: string
-  fileNameRegExp: string
+  titleRegExp: RegExp | string
+  tableRegExp: RegExp | string
+  fileNameRegExp: RegExp | string
   separator: string
   props: string
   propsName: string

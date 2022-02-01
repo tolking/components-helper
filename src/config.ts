@@ -4,10 +4,9 @@ const config: Config = {
   tags: 'tags.json',
   attributes: 'attributes.json',
   webTypes: 'web-types.json',
-  titleRegExp: '#+\\s+(.*)\\n+([^(#|\\n)]*)',
-  tableRegExp:
-    '#+\\s+(.*)\\n+(\\|?.+\\|.+)\\n\\|?\\s*:?-+:?\\s*\\|.+((\\n\\|?.+\\|.+)+)',
-  fileNameRegExp: '\\/((\\w|-)+)\\.\\w+$',
+  titleRegExp: /#+\s+(.*)\n+([^(#|\n)]*)/g,
+  tableRegExp: /#+\s+(.*)\n+(\|?.+\|.+)\n\|?\s*:?-+:?\s*\|.+((\n\|?.+\|.+)+)/g,
+  fileNameRegExp: /\/((\w|-)+)\.\w+$/,
   separator: '/',
   props: 'props',
   propsName: 'Name',

@@ -1,4 +1,4 @@
-import { isFunction } from './utils'
+import { isFunction, isString } from './utils'
 import type {
   Options,
   ParseData,
@@ -8,17 +8,10 @@ import type {
 } from './type'
 
 function parse(options: Options, file: string): ParseData {
-  const { titleRegExp, tableRegExp } = options
   const _file = normalizeFile(file)
-  const titleContent = _file.match(new RegExp(titleRegExp, 'g'))
-  const headers = titleContent
-    ? titleContent.map((item) => parseTitle(options, item))
-    : undefined
+  const headers = parseTitle(options, _file)
   const topHeader = headers && headers.length ? headers[0] : undefined
-  const tableContent = _file.match(new RegExp(tableRegExp, 'g'))
-  const table = tableContent
-    ? tableContent.map((item) => parseTable(options, item))
-    : undefined
+  const table = parseTable(options, _file)
 
   return {
     title: topHeader ? topHeader.title : undefined,
@@ -28,22 +21,37 @@ function parse(options: Options, file: string): ParseData {
   }
 }
 
-function parseTable(options: Options, str: string): ParseTable {
+function parseTitle(options: Options, str: string): ParseHeader[] {
+  const { titleRegExp } = options
+  const _titleRegExp = isString(titleRegExp)
+    ? new RegExp(titleRegExp, 'g')
+    : titleRegExp
+  const titleContent = str.matchAll(_titleRegExp)
+
+  return Array.from(titleContent, (item) => ({
+    title: item[1].trim(),
+    description: item[2].trim(),
+  }))
+}
+
+function parseTable(options: Options, str: string): ParseTable[] {
   const { tableRegExp } = options
-  const tableContent = str.match(new RegExp(tableRegExp))
-  const title = tableContent ? tableContent[1] : ''
-  const header = tableContent ? parseRow(tableContent[2]) : undefined
-  const columns = tableContent ? tableContent[3] : undefined
-  let content = [] as ParseTableColumn[]
+  const _tableRegExp = isString(tableRegExp)
+    ? new RegExp(tableRegExp, 'g')
+    : tableRegExp
+  const tableContent = str.matchAll(_tableRegExp)
 
-  if (header && columns) {
-    content = parseColumns(options, title, header, columns)
-  }
+  return Array.from(tableContent, (item) => {
+    const title = item ? item[1] : ''
+    const header = item ? parseRow(item[2]) : undefined
+    const columns = item ? item[3] : undefined
+    let content = [] as ParseTableColumn[]
 
-  return {
-    title,
-    content,
-  }
+    if (header && columns) {
+      content = parseColumns(options, title, header, columns)
+    }
+    return { title, content }
+  })
 }
 
 function parseRow(str: string): string[] {
@@ -88,18 +96,6 @@ function parseColumns(
   }
 
   return columns
-}
-
-function parseTitle(options: Options, str: string): ParseHeader {
-  const { titleRegExp } = options
-  const titleContent = str.match(new RegExp(titleRegExp))
-  const title = titleContent ? titleContent[1].trim() : undefined
-  const description = titleContent ? titleContent[2].trim() : undefined
-
-  return {
-    title,
-    description,
-  }
 }
 
 function normalizeFile(file: string): string {
