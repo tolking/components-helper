@@ -1,14 +1,14 @@
 import fg from 'fast-glob'
-import config from './config'
-import read from './read'
-import parse from './parse'
-import normalize from './normalize'
-import vetur from './vetur'
-import webTypes from './webTypes'
-import write from './write'
+import { config } from './config'
+import { read } from './read'
+import { parse } from './parse'
+import { normalize } from './normalize'
+import { vetur } from './vetur'
+import { webTypes } from './webTypes'
+import { write } from './write'
 import type { InstallOptions, Options } from './type'
 
-const main = (options = {} as InstallOptions): void => {
+export function main(options = {} as InstallOptions) {
   if (!options.entry)
     throw new Error('entry must be a string (non empty) or an array of strings')
   if (!options.outDir) throw new Error('outDir must be a string (non empty)')
@@ -30,7 +30,3 @@ const main = (options = {} as InstallOptions): void => {
   write(_options, 'attributes', attributes)
   write(_options, 'webTypes', webTypesData)
 }
-
-export * from './type'
-export default main
-module.exports = main
