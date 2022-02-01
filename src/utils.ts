@@ -8,6 +8,10 @@ export function checkArray<T extends Array<unknown>>(item: T): T | undefined {
   return item && item.length ? item : undefined
 }
 
+export function isString(val: unknown): val is string {
+  return typeof val === 'string'
+}
+
 // eslint-disable-next-line @typescript-eslint/ban-types
 export function isFunction(val: unknown): val is Function {
   return typeof val === 'function'
