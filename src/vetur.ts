@@ -6,7 +6,7 @@ import {
 } from './utils'
 import type { Options, NormalizeData, Tags, Props } from './type'
 
-function vetur(
+export function vetur(
   options: Options,
   list: NormalizeData[],
 ): {
@@ -130,5 +130,3 @@ function vetur(
 
   return { tags: tagsList, attributes: propsList }
 }
-
-export default vetur

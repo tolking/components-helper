@@ -1,7 +1,7 @@
 import { isString } from './utils'
 import type { Options, ParseData, NormalizeData, ParseTable } from './type'
 
-function normalize(
+export function normalize(
   options: Options,
   data: ParseData,
   path: string,
@@ -115,5 +115,3 @@ function setData({
     data[key] = item
   }
 }
-
-export default normalize
