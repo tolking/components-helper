@@ -1,5 +1,44 @@
 # Changelog
 
+### 2.0.0
+
+feat
+
+- export all function
+- use matchAll replace match
+- add RegExp for `titleRegExp` `tableRegExp` and `fileNameRegExp`
+
+#### migration guide
+
+``` diff
+- const helper = require('../lib/index')
++ const helper = require('../lib/index').default
+# or
+- const helper = require('../lib/index')
++ const { main } = require('../lib/index')
+```
+
+It is recommended to replace regular strings with RegExp
+
+``` diff
+{
+-  titleRegExp: '#+\\s+(.*)\\n+([^(#|\\n)]*)',
++  titleRegExp: /#+\s+(.*)\n+([^(#|\n)]*)/g,
+
+-  titleRegExp: '#+\\s+(.*)\\n+>\\s\*([^(#|\\n)]*)',
++  titleRegExp: /#+\s+(.*)\n+>\s\*([^(#|\n)]*)/g,
+
+-  tableRegExp: '#+\\s+(.*)\\n+(\\|?.+\\|.+)\\n\\|?\\s*:?-+:?\\s*\\|.+((\\n\\|?.+\\|.+)+)',
++  tableRegExp: /#+\s+(.*)\n+(\|?.+\|.+)\n\|?\s*:?-+:?\s*\|.+((\n\|?.+\|.+)+)/g,
+
+-  tableRegExp: '#+\\s+(.*\\s*Props|.*\\s*Events|.*\\s*Slots|.*\\s*Directives)\\s*\\n+(\\|?.+\\|.+)\\n\\|?\\s*:?-+:?\\s*\\|.+((\\n\\|?.+\\|.+)+)',
++  tableRegExp: /#+\s+(.*\s*Props|.*\s*Events|.*\s*Slots|.*\s*Directives)\n+(\|?.+\|.+)\n\|?\s*:?-+:?\s*\|.+((\n\|?.+\|.+)+)/g,
+
+-  fileNameRegExp: '\\/((\\w|-)+)\\.\\w+$',
++  fileNameRegExp: /\/((\w|-)+)\.\w+$/,
+}
+```
+
 ### 1.0.5
 
 feat

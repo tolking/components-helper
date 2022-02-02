@@ -17,9 +17,9 @@ npm i components-helper --save-dev
 ## Usage
 
 ``` js
-const helper = require('components-helper')
+const { main } = require('components-helper')
 
-helper({
+main({
   // Options
 })
 ```
@@ -45,7 +45,6 @@ then in package.json
 
 <details>
 <summary>TOC</summary>
-<br>
 
 - [entry (required)](#entry)
 - [outDir (required)](#outdir)
@@ -82,7 +81,6 @@ then in package.json
 - [tableRegExp](#tableregexp)
 - [fileNameRegExp](#filenameregexp)
 
-<br>
 </details>
 
 ### entry
@@ -317,22 +315,22 @@ name for directives header type
 
 ### titleRegExp
 
-- Type: `string` (**This is a regular string.**)
-- Default: `#+\\s+(.*)\\n+([^(#|\\n)]*)`
+- Type: `RegExp` | `string` (**This is a regular string.**)
+- Default: `/#+\s+(.*)\n+([^(#|\n)]*)/g`
 
 matches the title and description information from docs
 
 ### tableRegExp
 
-- Type: `string` (**This is a regular string.**)
-- Default: `#+\\s+(.*)\\n+(\\|?.+\\|.+)\\n\\|?\\s*:?-+:?\\s*\\|.+((\\n\\|?.+\\|.+)+)`
+- Type: `RegExp` | `string` (**This is a regular string.**)
+- Default: `/#+\s+(.*)\n+(\|?.+\|.+)\n\|?\s*:?-+:?\s*\|.+((\n\|?.+\|.+)+)/g`
 
 matches the title and table header and table content information from docs
 
 ### fileNameRegExp
 
-- Type: `string` (**This is a regular string.**)
-- Default: `\\/((\\w|-)+)\\.\\w+$`
+- Type: `RegExp` | `string` (**This is a regular string.**)
+- Default: `/\/((\w|-)+)\.\w+$/`
 
 matches the file name from path
 
@@ -342,7 +340,7 @@ matches the file name from path
 
 matches the first format information in the docs
 
-#+\\\\s+(`.*`)\\\\n+(`[^(#|\\n)]*`)
+/#+\s+(`.*`)\n+(`[^(#|\n)]*`)/
 
 <div>
 # <code>title</code>
@@ -357,7 +355,7 @@ and
 
 matches other formats, For example:
 
-#+\\\\s+(`.*`)\\n+>\\\\s\*(`[^(#|\\n)]*`)
+/#+\s+(`.*`)\n+>\s\*(`[^(#|\n)]*`)/g
 
 <div>
 # <code>title</code>
@@ -368,7 +366,7 @@ matches other formats, For example:
 
 matches the format information in the docs
 
-#+\\\\s+(`.*`)\\\\n+(`\\|?.+\\|.+`)\\\\n\\\\|?\\\\s*:?-+:?\\\\s\*\\\\|.+(`(\\n\\|?.+\\|.+)+`)
+/#+\s+(`.*`)\n+(`\|?.+\|.+`)\n\|?\s*:?-+:?\s*\|.+(`(\n\|?.+\|.+)+`)/g
 
 <div>
 ### <code>title</code>
@@ -390,7 +388,7 @@ and
 
 by default matches all table, Optimize it through tableRegExp, For example:
 
-#+\\\\s+(`.*\\s*Props|.*\\s*Events|.*\\s*Slots|.*\\s*Directives`)\\\\s*\\\\n+(`\\|?.+\\|.+`)\\\\n\\\\|?\\\\s*:?-+:?\\\\s*\\\\|.+(`(\\n\\|?.+\\|.+)+`)
+/#+\s+(`.*\s*Props|.*\s*Events|.*\s*Slots|.*\s*Directives`)\n+(`\|?.+\|.+`)\n\|?\s*:?-+:?\s*\|.+(`(\n\|?.+\|.+)+`)/g
 
 <div>
 ### <code>Props | Events | Slots | Directives</code>
