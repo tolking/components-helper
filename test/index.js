@@ -11,8 +11,6 @@ helper({
   reAttribute,
   reWebTypesSource,
   space: 2,
-  tableRegExp:
-    /#+\s+(.*\s*Props|.*\s*Events|.*\s*Slots|.*\s*Directives)\n+(\|?.+\|.+)\n\|?\s*:?-+:?\s*\|.+((\n\|?.+\|.+)+)/g,
 })
 
 function reComponentName(title) {

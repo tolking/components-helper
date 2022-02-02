@@ -25,14 +25,14 @@ It is recommended to replace regular strings with RegExp
 -  titleRegExp: '#+\\s+(.*)\\n+([^(#|\\n)]*)',
 +  titleRegExp: /#+\s+(.*)\n+([^(#|\n)]*)/g,
 
--  titleRegExp: '#+\\\\s+(`.*`)\\n+>\\\\s\*(`[^(#|\\n)]*`)',
-+  titleRegExp: /#+\s+(`.*`)\n+>\s\*(`[^(#|\n)]*`)/g,
+-  titleRegExp: '#+\\s+(.*)\\n+>\\s\*([^(#|\\n)]*)',
++  titleRegExp: /#+\s+(.*)\n+>\s\*([^(#|\n)]*)/g,
 
 -  tableRegExp: '#+\\s+(.*)\\n+(\\|?.+\\|.+)\\n\\|?\\s*:?-+:?\\s*\\|.+((\\n\\|?.+\\|.+)+)',
 +  tableRegExp: /#+\s+(.*)\n+(\|?.+\|.+)\n\|?\s*:?-+:?\s*\|.+((\n\|?.+\|.+)+)/g,
 
--  tableRegExp: '#+\\\\s+(`.*\\s*Props|.*\\s*Events|.*\\s*Slots|.*\\s*Directives`)\\\\s*\\\\n+(`\\|?.+\\|.+`)\\\\n\\\\|?\\\\s*:?-+:?\\\\s*\\\\|.+(`(\\n\\|?.+\\|.+)+`)',
-+  tableRegExp: /#+\s+(`.*\s*Props|.*\s*Events|.*\s*Slots|.*\s*Directives`)\n+(`\|?.+\|.+`)\n\|?\s*:?-+:?\s*\|.+(`(\n\|?.+\|.+)+`)/g,
+-  tableRegExp: '#+\\s+(.*\\s*Props|.*\\s*Events|.*\\s*Slots|.*\\s*Directives)\\s*\\n+(\\|?.+\\|.+)\\n\\|?\\s*:?-+:?\\s*\\|.+((\\n\\|?.+\\|.+)+)',
++  tableRegExp: /#+\s+(.*\s*Props|.*\s*Events|.*\s*Slots|.*\s*Directives)\n+(\|?.+\|.+)\n\|?\s*:?-+:?\s*\|.+((\n\|?.+\|.+)+)/g,
 
 -  fileNameRegExp: '\\/((\\w|-)+)\\.\\w+$',
 +  fileNameRegExp: /\/((\w|-)+)\.\w+$/,
