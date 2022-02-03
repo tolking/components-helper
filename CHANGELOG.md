@@ -25,8 +25,8 @@ It is recommended to replace regular strings with RegExp
 -  titleRegExp: '#+\\s+(.*)\\n+([^(#|\\n)]*)',
 +  titleRegExp: /#+\s+(.*)\n+([^(#|\n)]*)/g,
 
--  titleRegExp: '#+\\s+(.*)\\n+>\\s\*([^(#|\\n)]*)',
-+  titleRegExp: /#+\s+(.*)\n+>\s\*([^(#|\n)]*)/g,
+-  titleRegExp: '#+\\s+(.*)\\n+>\\s*([^(#|\\n)]*)',
++  titleRegExp: /#+\s+(.*)\n+>\s*([^(#|\n)]*)/g,
 
 -  tableRegExp: '#+\\s+(.*)\\n+(\\|?.+\\|.+)\\n\\|?\\s*:?-+:?\\s*\\|.+((\\n\\|?.+\\|.+)+)',
 +  tableRegExp: /#+\s+(.*)\n+(\|?.+\|.+)\n\|?\s*:?-+:?\s*\|.+((\n\|?.+\|.+)+)/g,
