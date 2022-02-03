@@ -355,7 +355,7 @@ and
 
 matches other formats, For example:
 
-/#+\s+(`.*`)\n+>\s\*(`[^(#|\n)]*`)/g
+/#+\s+(`.*`)\n+>\s*(`[^(#|\n)]*`)/g
 
 <div>
 # <code>title</code>
