@@ -8,11 +8,10 @@ import type {
   Options,
   NormalizeData,
   WebTypes,
-  WebTag,
-  WebDirective,
+  WebElement,
   WebAttribute,
   WebEvent,
-  WebSlot,
+  BaseContribution,
 } from './type'
 
 export function webTypes(options: Options, list: NormalizeData[]): WebTypes {
@@ -20,16 +19,15 @@ export function webTypes(options: Options, list: NormalizeData[]): WebTypes {
   const { tags, attributes } = getWebTypes(options, list)
 
   return {
-    $schema:
-      'https://raw.githubusercontent.com/JetBrains/web-types/master/schema/web-types.json',
+    $schema: 'http://json.schemastore.org/web-types',
     framework: 'vue',
     name,
     version,
+    'js-types-syntax': 'typescript',
+    'description-markup': 'markdown',
     contributions: {
       html: {
-        'types-syntax': 'typescript',
-        'description-markup': 'markdown',
-        tags,
+        'vue-components': tags,
         attributes,
       },
     },
@@ -50,8 +48,8 @@ export function getWebTypes(options: Options, list: NormalizeData[]) {
     directivesType,
     directivesDescription,
   } = options
-  let tagsList = [] as WebTag[]
-  let directivesList = [] as WebDirective[]
+  let tagsList = [] as WebElement[]
+  let directivesList = [] as WebAttribute[]
 
   for (let i = 0; i < list.length; i++) {
     const {
@@ -72,7 +70,7 @@ export function getWebTypes(options: Options, list: NormalizeData[]) {
     const _directives = directives ? directives.content : []
     const propsList = [] as WebAttribute[]
     const eventsList = [] as WebEvent[]
-    const slotsList = [] as WebSlot[]
+    const slotsList = [] as BaseContribution[]
 
     _directives.forEach((item) => {
       const _item = item[directivesName]
@@ -154,7 +152,7 @@ export function getWebTypes(options: Options, list: NormalizeData[]) {
       source: getWebTypesSource(options, title, fileName, path),
       description,
       'doc-url': getDocUrl(options, fileName, title, path),
-      attributes: checkArray(propsList),
+      props: checkArray(propsList),
       events: checkArray(eventsList),
       slots: checkArray(slotsList),
     })
