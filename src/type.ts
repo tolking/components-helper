@@ -381,6 +381,10 @@ export interface HtmlContributionsHost {
    * HTML attributes.
    */
   attributes?: WebAttribute[]
+  /**
+   * for Vue
+   */
+  'vue-components'?: WebElement[]
 }
 /**
  * The base for any contributions.

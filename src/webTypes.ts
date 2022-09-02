@@ -16,8 +16,7 @@ import type {
 
 export function webTypes(options: Options, list: NormalizeData[]): WebTypes {
   const { name, version } = options
-  const { elements, attributes, events } = getWebTypes(options, list)
-  console.log(events)
+  const { tags, attributes } = getWebTypes(options, list)
 
   return {
     $schema: 'http://json.schemastore.org/web-types',
@@ -28,11 +27,8 @@ export function webTypes(options: Options, list: NormalizeData[]): WebTypes {
     'description-markup': 'markdown',
     contributions: {
       html: {
-        elements,
+        'vue-components': tags,
         attributes,
-      },
-      js: {
-        events,
       },
     },
   }
@@ -54,7 +50,6 @@ export function getWebTypes(options: Options, list: NormalizeData[]) {
   } = options
   let tagsList = [] as WebElement[]
   let directivesList = [] as WebAttribute[]
-  let eventsList = [] as WebEvent[]
 
   for (let i = 0; i < list.length; i++) {
     const {
@@ -74,7 +69,7 @@ export function getWebTypes(options: Options, list: NormalizeData[]) {
     const _slots = slots ? slots.content : []
     const _directives = directives ? directives.content : []
     const propsList = [] as WebAttribute[]
-    const eventList = [] as WebEvent[]
+    const eventsList = [] as WebEvent[]
     const slotsList = [] as BaseContribution[]
 
     _directives.forEach((item) => {
@@ -99,11 +94,8 @@ export function getWebTypes(options: Options, list: NormalizeData[]) {
     if (children && children.length) {
       const child = getWebTypes(options, children)
 
-      if (child.elements) {
-        tagsList = tagsList.concat(child.elements)
-      }
-      if (child.events) {
-        eventsList = eventsList.concat(child.events)
+      if (child.tags) {
+        tagsList = tagsList.concat(child.tags)
       }
       if (child.attributes) {
         directivesList = directivesList.concat(child.attributes)
@@ -135,7 +127,7 @@ export function getWebTypes(options: Options, list: NormalizeData[]) {
       const _item = item[eventsName]
 
       if (_item) {
-        eventList.push({
+        eventsList.push({
           name: _item,
           description: item[eventsDescription],
           'doc-url': getDocUrl(options, fileName, events?.title, path),
@@ -155,28 +147,19 @@ export function getWebTypes(options: Options, list: NormalizeData[]) {
       }
     })
 
-    const common = {
+    tagsList.push({
       name,
       source: getWebTypesSource(options, title, fileName, path),
       description,
       'doc-url': getDocUrl(options, fileName, title, path),
-    }
-
-    tagsList.push({
-      ...common,
-      attributes: checkArray(propsList),
+      props: checkArray(propsList),
+      events: checkArray(eventsList),
       slots: checkArray(slotsList),
     })
-    eventList.length &&
-      eventsList.push({
-        ...common,
-        events: checkArray(eventList),
-      })
   }
 
   return {
-    elements: checkArray(tagsList),
+    tags: checkArray(tagsList),
     attributes: checkArray(directivesList),
-    events: checkArray(eventsList),
   }
 }
