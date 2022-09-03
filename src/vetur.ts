@@ -3,6 +3,7 @@ import {
   getDocUrl,
   getVeturDescription,
   checkArray,
+  splitString,
 } from './utils'
 import type { Options, NormalizeData, Tags, Props } from './type'
 
@@ -59,11 +60,11 @@ export function vetur(
       if (_item) {
         const docUrl = getDocUrl(options, fileName, props?.title, path)
         const _name = name + '/' + _item
-        const _type = item[propsType] || ''
+        const _type = (item[propsType] || '').replace(separator, '|')
         const _options = item[propsOptions]
         const _optionsList =
           /string/i.test(_type) && _options
-            ? _options.split(separator).map((item) => item.trim())
+            ? splitString(options, _options)
             : undefined
         const _description = getVeturDescription(
           options,
@@ -74,7 +75,7 @@ export function vetur(
 
         tagsProps.push(_item)
         propsList[_name] = {
-          type: item[propsType],
+          type: _type || undefined,
           options: _optionsList,
           description: _description,
         }
@@ -104,9 +105,7 @@ export function vetur(
 
     _slots.forEach((item) => {
       const _subtags = item[slotsSubtags]
-      const _subtagsList = _subtags
-        ? _subtags.split(separator).map((item) => item.trim())
-        : undefined
+      const _subtagsList = _subtags ? splitString(options, _subtags) : undefined
 
       if (_subtagsList) {
         subtags = subtags.concat(_subtagsList)

@@ -4,8 +4,8 @@ export function hyphenate(str: string): string {
   return str.replace(/\B([A-Z])/g, '-$1').toLowerCase()
 }
 
-export function checkArray<T extends Array<unknown>>(item: T): T | undefined {
-  return item && item.length ? item : undefined
+export function checkArray<T extends Array<unknown>>(item?: T): T | undefined {
+  return item?.length ? item : undefined
 }
 
 export function isString(val: unknown): val is string {
@@ -19,6 +19,16 @@ export function isFunction(val: unknown): val is Function {
 
 export function normalizeFile(file: string): string {
   return file.replace(/\r\n/g, '\n')
+}
+
+export function splitString(
+  options: Options,
+  str?: string,
+): string[] | undefined {
+  if (!str) return undefined
+
+  const { separator } = options
+  return str.split(separator).map((item) => item.trim())
 }
 
 export function getComponentsName(
