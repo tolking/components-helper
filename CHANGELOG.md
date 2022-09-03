@@ -1,5 +1,12 @@
 # Changelog
 
+### 2.1.0
+
+feat
+
+- update web-types to 2.0
+- add attribute enum autosuggestion for web-types
+
 ### 2.0.0
 
 feat
