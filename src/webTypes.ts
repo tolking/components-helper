@@ -3,6 +3,7 @@ import {
   getDocUrl,
   getWebTypesSource,
   checkArray,
+  splitString,
 } from './utils'
 import type {
   Options,
@@ -39,6 +40,7 @@ export function getWebTypes(options: Options, list: NormalizeData[]) {
     propsName,
     propsType,
     propsDescription,
+    propsOptions,
     propsDefault,
     eventsName,
     eventsDescription,
@@ -81,12 +83,7 @@ export function getWebTypes(options: Options, list: NormalizeData[]) {
           source: getWebTypesSource(options, title, fileName, path),
           description: item[directivesDescription],
           'doc-url': getDocUrl(options, fileName, directives?.title, path),
-          value: item[directivesType]
-            ? {
-                type: item[directivesType] as string,
-                kind: 'expression',
-              }
-            : undefined,
+          type: checkArray(splitString(options, item[directivesType])),
         })
       }
     })
@@ -108,17 +105,18 @@ export function getWebTypes(options: Options, list: NormalizeData[]) {
       const _item = item[propsName]
 
       if (_item) {
+        const _optionsList = splitString(options, item[propsOptions])
+
         propsList.push({
           name: _item,
           description: item[propsDescription],
           'doc-url': getDocUrl(options, fileName, props?.title, path),
+          type: checkArray(splitString(options, item[propsType])),
           default: item[propsDefault],
-          value: item[propsType]
-            ? {
-                type: item[propsType] as string,
-                kind: 'expression',
-              }
+          'attribute-value': checkArray(_optionsList)
+            ? { type: 'enum' }
             : undefined,
+          values: checkArray(_optionsList?.map((name) => ({ name }))),
         })
       }
     })
