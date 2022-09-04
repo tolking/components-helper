@@ -45,7 +45,6 @@ then in package.json
 
 <details>
 <summary>TOC</summary>
-
 - [entry (required)](#entry)
 - [outDir (required)](#outdir)
 - [name (required)](#name)
@@ -57,6 +56,7 @@ then in package.json
 - [reAttribute](#reattribute)
 - [reVeturDescription](#reveturdescription)
 - [reWebTypesSource](#rewebtypessource)
+- [reWebTypesType](#rewebtypestype)
 - [tags](#tags)
 - [attributes](#attributes)
 - [webTypes](#webtypes)
@@ -80,7 +80,6 @@ then in package.json
 - [titleRegExp](#titleregexp)
 - [tableRegExp](#tableregexp)
 - [fileNameRegExp](#filenameregexp)
-
 </details>
 
 ### entry
@@ -93,16 +92,14 @@ entry path, refer: [fast-glob](https://github.com/mrmlnc/fast-glob#pattern-synta
 for example:
   - `docs/*.md` -- matches all files in the docs
   - `docs/(a|b).md` -- matches files `a.md` and `b.md`
-  - `docs/!(a|b).md` -- matches files except `a.md` and `b.md`
+  - `docs/!(a|b).md` -- matches files except for `a.md` and `b.md`
 
 ### outDir
 
 - Required: `true`
 - Type: `string`
 
-outDir path
-
-For example: `lib`
+outDir path, For example `lib`
 
 ### name
 
@@ -116,7 +113,7 @@ name of the component library.
 - Required: `true`
 - Type: `string`
 
-version of the component library. 
+the version of the component library. 
 
 ### space
 
@@ -138,7 +135,7 @@ the separator for propsOptions, slotsSubtags, type ...
 
 rewriting the name of the component
 
-for example: `(title) => 'prefix-' + title.replace(/\B([A-Z])/g, '-$1').toLowerCase()`
+for example `(title) => 'prefix-' + title.replace(/\B([A-Z])/g, '-$1').toLowerCase()`
 
 ### reDocUrl
 
@@ -168,10 +165,15 @@ rewriting the description of vetur
 
 ### reWebTypesSource
 
-- Type: `(title: string, fileName: string, path: string) => { module?: string; symbol: string } | { file: string; offset: number }`
-- Default: `{ symbol: title }`
+- Type: `(title: string, fileName: string, path: string) => Source`
 
-rewriting the source of web-types. (the name of export from conmonents library)
+rewriting the source of web-types. (the name of export from the component library)
+
+### reWebTypesType
+
+- Type: `(type: string) => undefined | string | BaseContribution`
+
+Only some common types are processed internally, and the rest are exported from the component library by default. If your document also references types in third-party libraries, you can choose to override the relevant behavior through this function
 
 ### tags
 
@@ -206,7 +208,7 @@ name of props table. **other string in the header will be identified as sub-comp
 - Type: `string`
 - Default: `Name`
 
-name for props header name
+name for the props header name
 
 ### propsDescription
 
@@ -248,7 +250,7 @@ name of events table. **other string in the header will be identified as sub-com
 - Type: `string`
 - Default: `Name`
 
-name for events header name
+name for the events header name
 
 ### eventsDescription
 
@@ -269,7 +271,7 @@ name of slots table. **other string in the header will be identified as sub-comp
 - Type: `string`
 - Default: `Name`
 
-name for slots header name
+name for the slots header name
 
 ### slotsDescription
 
@@ -297,7 +299,7 @@ name of directives table. **other string in the header will be identified as sub
 - Type: `string`
 - Default: `Name`
 
-name for directives header name
+name for the directives header name
 
 ### directivesDescription
 
@@ -325,14 +327,14 @@ matches the title and description information from docs
 - Type: `RegExp` | `string` (**This is a regular string.**)
 - Default: `/#+\s+(.*)\n+(\|?.+\|.+)\n\|?\s*:?-+:?\s*\|.+((\n\|?.+\|.+)+)/g`
 
-matches the title and table header and table content information from docs
+matches the title and table header and the table contains information from docs
 
 ### fileNameRegExp
 
 - Type: `RegExp` | `string` (**This is a regular string.**)
 - Default: `/\/((\w|-)+)\.\w+$/`
 
-matches the file name from path
+matches the file name from the path
 
 ## Advancement
 
@@ -386,7 +388,7 @@ and
 <div><code>| column |</code></div>
 </div>
 
-by default matches all table, Optimize it through tableRegExp, For example:
+by default matches all tables, Optimize it through tableRegExp, For example:
 
 /#+\s+(`.*\s*Props|.*\s*Events|.*\s*Slots|.*\s*Directives`)\n+(`\|?.+\|.+`)\n\|?\s*:?-+:?\s*\|.+(`(\n\|?.+\|.+)+`)/g
 
@@ -410,7 +412,7 @@ and
 
 ### other
 
-- When this docs not included the primary title or `Props` `Events` `Slots` and `Directives`, this component are not created.
+When this document does not include the primary title or `Props` `Events` `Slots` and `Directives`, this component is not created.
 
 ## License
 
