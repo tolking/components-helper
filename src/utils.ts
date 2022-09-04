@@ -1,4 +1,4 @@
-import type { Options, Source } from './type'
+import type { Options, Source, BaseContribution } from './type'
 
 export function hyphenate(str: string): string {
   return str.replace(/\B([A-Z])/g, '-$1').toLowerCase()
@@ -15,6 +15,63 @@ export function isString(val: unknown): val is string {
 // eslint-disable-next-line @typescript-eslint/ban-types
 export function isFunction(val: unknown): val is Function {
   return typeof val === 'function'
+}
+
+export function isCommonType(type: string): boolean {
+  const typeList = [
+    'undefined',
+    'null',
+    'string',
+    'number',
+    'object',
+    'array',
+    'String',
+    'Number',
+    'Object',
+    'Array(<.*>)?',
+    'Function(\\(.*\\))?',
+    'Symbol',
+    'Date',
+    'Map(<.*>)?',
+    'Set(<.*>)?',
+    'WeakMap(<.*>)?',
+    'WeakSet(<.*>)?',
+    'Promise(<.*>)?',
+    'RegExp',
+    'JSON',
+    'ArrayBuffer',
+    'DataView',
+    'Int\\d+Array',
+    'Uint\\d+Array',
+    'Float\\d+Array',
+    'BigInt\\d+Array',
+    'BigUint\\d+Array',
+    'Partial(<.*>)?',
+    'Required(<.*>)?',
+    'Readonly(<.*>)?',
+    'Pick(<.*>)?',
+    'Record(<.*>)?',
+    'Exclude(<.*>)?',
+    'Extract(<.*>)?',
+    'Omit(<.*>)?',
+    'ReturnType(<.*>)?',
+    'InstanceType(<.*>)?',
+    '(HTML.*)?Element',
+  ]
+  const regExp = arrayToRegExp(typeList)
+
+  return regExp.test(getTypeSymbol(type))
+}
+
+export function arrayToRegExp(arr: string[], flags?: string): RegExp {
+  return new RegExp(`^(${arr.join('|')})$`, flags)
+}
+
+export function getTypeSymbol(type: string) {
+  return type
+    .replace(/\[\]$/, '')
+    .replace(/<.*?>$/, '')
+    .replace(/\{.*\}$/, '')
 }
 
 export function normalizeFile(file: string): string {
@@ -83,8 +140,40 @@ export function getWebTypesSource(
   fileName: string,
   path: string,
 ): Source {
-  const { name, reWebTypesSource } = options
+  const { reWebTypesSource } = options
   return isFunction(reWebTypesSource)
     ? reWebTypesSource(title, fileName, path)
-    : { module: name, symbol: title }
+    : { symbol: title }
+}
+
+function getType(type: string): string | BaseContribution {
+  const isPublicType = isCommonType(type)
+  const symbol = getTypeSymbol(type)
+
+  return isPublicType || !symbol ? type : { name: type, source: { symbol } }
+}
+
+export function getWebTypesType(
+  options: Options,
+  type?: string,
+): undefined | Array<string | BaseContribution> {
+  const { reWebTypesType } = options
+  const list = splitString(options, type)
+
+  if (list?.length) {
+    const types = []
+
+    for (let i = 0; i < list.length; i++) {
+      const item = list[i].replaceAll('\\', '')
+      const result = isFunction(reWebTypesType)
+        ? reWebTypesType(item)
+        : getType(item)
+
+      result && types.push(result)
+    }
+
+    return types
+  } else {
+    return undefined
+  }
 }
