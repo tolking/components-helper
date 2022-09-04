@@ -29,6 +29,10 @@ export type ReWebTypesSource = (
   path: string,
 ) => Source
 
+export type ReWebTypesType = (
+  type: string,
+) => undefined | string | BaseContribution
+
 export interface OptionsConfig {
   entry: string
   outDir: string
@@ -40,6 +44,7 @@ export interface OptionsConfig {
   reAttribute?: ReAttribute
   reVeturDescription?: ReVeturDescription
   reWebTypesSource?: ReWebTypesSource
+  reWebTypesType?: ReWebTypesType
 }
 
 export interface Config {
@@ -239,7 +244,7 @@ export type NamePattern =
 export type Required = boolean
 export type NamePatternTemplate = [
   string | NamePatternTemplate | NamePattern,
-  ...(string | NamePatternTemplate | NamePattern)[],
+  ...(string | NamePatternTemplate | NamePattern)[]
 ]
 /**
  * A reference to an element in Web-Types model.

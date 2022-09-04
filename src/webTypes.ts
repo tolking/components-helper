@@ -4,6 +4,7 @@ import {
   getWebTypesSource,
   checkArray,
   splitString,
+  getWebTypesType,
 } from './utils'
 import type {
   Options,
@@ -83,7 +84,7 @@ export function getWebTypes(options: Options, list: NormalizeData[]) {
           source: getWebTypesSource(options, title, fileName, path),
           description: item[directivesDescription],
           'doc-url': getDocUrl(options, fileName, directives?.title, path),
-          type: checkArray(splitString(options, item[directivesType])),
+          type: checkArray(getWebTypesType(options, item[directivesType])),
         })
       }
     })
@@ -111,7 +112,7 @@ export function getWebTypes(options: Options, list: NormalizeData[]) {
           name: _item,
           description: item[propsDescription],
           'doc-url': getDocUrl(options, fileName, props?.title, path),
-          type: checkArray(splitString(options, item[propsType])),
+          type: checkArray(getWebTypesType(options, item[propsType])),
           default: item[propsDefault],
           'attribute-value': checkArray(_optionsList)
             ? { type: 'enum' }
