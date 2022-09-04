@@ -16,7 +16,7 @@ This is a description of the Demo component
 <!-- 
   The type support TypeScript writing, but in order to generate better code hints, there are some requirements for reference types
 
-  recommend: `VNode[]`, `VNode[] \| Array<string>`
+  recommend: `VNode[]`, `VNode[] / Array<string>`
   not recommend: `Array<VNode>`, `Array<VNode \| string>`
  -->
 

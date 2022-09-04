@@ -1,5 +1,12 @@
 # Changelog
 
+### 2.1.1
+
+feat
+
+- add config reWebTypesType
+- improve types for web-types
+
 ### 2.1.0
 
 feat
