@@ -60,7 +60,7 @@ export function vetur(
       if (_item) {
         const docUrl = getDocUrl(options, fileName, props?.title, path)
         const _name = name + '/' + _item
-        const _type = (item[propsType] || '').replace(separator, '|')
+        const _type = (item[propsType] || '').replaceAll(separator, '|')
         const _options = item[propsOptions]
         const _optionsList =
           /string/i.test(_type) && _options
