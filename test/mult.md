@@ -18,7 +18,7 @@ This is a description of the Third component
 
 | Name | Description | Type | Options | Default |
 |----- |------------ |----- |-------- | ------- |
-| v-model | bind value | string | top / bottom | top |
+| v-model | bind value | string / number || top |
 
 ## First Slots
 
@@ -30,7 +30,7 @@ This is a description of the Third component
 
 | Name | Description | Type | Options | Default |
 |----- |------------ |----- |-------- | ------- |
-| v-model | bind value | string | top / bottom ||
+| v-model | bind value | string / number |||
 
 ## Third Events
 

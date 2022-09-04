@@ -13,6 +13,12 @@ This is a description of the Demo component
 | v-model | bind value | string | top / bottom ||
 
 <!-- The header of the table can be configured -->
+<!-- 
+  The type support TypeScript writing, but in order to generate better code hints, there are some requirements for reference types
+
+  recommend: `VNode[]`, `VNode[] \| Array<string>`
+  not recommend: `Array<VNode>`, `Array<VNode \| string>`
+ -->
 
 ## Events
 
