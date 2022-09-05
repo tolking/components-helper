@@ -1,5 +1,17 @@
 # Changelog
 
+### 2.1.2
+
+feat
+
+- support filter options from type ([view instructions for use](./test/mult.md))
+- export utils functions
+
+fix
+
+- miss type boolean
+- partial separator not replaced
+
 ### 2.1.1
 
 feat

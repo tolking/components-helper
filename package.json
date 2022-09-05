@@ -1,6 +1,6 @@
 {
   "name": "components-helper",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Based on the docs to provide code prompt files for vue component library",
   "main": "lib/index.js",
   "module": "lib/index.es.js",
