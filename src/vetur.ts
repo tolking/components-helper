@@ -4,6 +4,7 @@ import {
   getVeturDescription,
   checkArray,
   splitString,
+  filterVeturOptions,
 } from './utils'
 import type { Options, NormalizeData, Tags, Props } from './type'
 
@@ -62,10 +63,8 @@ export function vetur(
         const _name = name + '/' + _item
         const _type = (item[propsType] || '').replaceAll(separator, '|')
         const _options = item[propsOptions]
-        const _optionsList =
-          /string/i.test(_type) && _options
-            ? splitString(options, _options)
-            : undefined
+        const _optionsList = splitString(options, _options)
+        const _typeOptionsList = filterVeturOptions({ separator: '|' }, _type)
         const _description = getVeturDescription(
           options,
           item[propsDescription],
@@ -76,7 +75,7 @@ export function vetur(
         tagsProps.push(_item)
         propsList[_name] = {
           type: _type || undefined,
-          options: _optionsList,
+          options: checkArray(_optionsList || _typeOptionsList),
           description: _description,
         }
       }

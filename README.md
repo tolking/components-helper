@@ -45,6 +45,7 @@ then in package.json
 
 <details>
 <summary>TOC</summary>
+
 - [entry (required)](#entry)
 - [outDir (required)](#outdir)
 - [name (required)](#name)
@@ -80,6 +81,7 @@ then in package.json
 - [titleRegExp](#titleregexp)
 - [tableRegExp](#tableregexp)
 - [fileNameRegExp](#filenameregexp)
+
 </details>
 
 ### entry
@@ -187,14 +189,14 @@ name for tags of the vetur
 - Type: `string`
 - Default: `attributes.json`
 
-name for attributes of the vetur
+name for attributes of the Vetur
 
 ### webTypes
 
 - Type: `string`
 - Default: `web-types.json`
 
-name for web-types of the webstrom
+name for web-types of the WebStorm
 
 ### props
 

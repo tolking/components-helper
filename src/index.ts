@@ -7,5 +7,6 @@ export * from './normalize'
 export * from './vetur'
 export * from './webTypes'
 export * from './write'
+export * from './utils'
 export * from './type'
 export default main

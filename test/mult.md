@@ -16,9 +16,16 @@ This is a description of the Third component
 
 ## First Props
 
-| Name | Description | Type | Options | Default |
-|----- |------------ |----- |-------- | ------- |
-| v-model | bind value | string / number || top |
+| Name | Description | Type | Default |
+|------|-------------|------|---------|
+| size | size of component | 'default' / 'small' / 'large' | default |
+| type | type of component | 'primary' \| 'success' \| 'warning' \| 'danger' ||
+
+<!--
+ Supports the use of separator `/` to split the type, and is compatible with the `\|` split type
+ 
+ To generate better type hints, the `\|` cannot be used with reference types, eg `CommonType \| 'primary' \| 'success'`
+ -->
 
 ## First Slots
 
@@ -28,9 +35,16 @@ This is a description of the Third component
 
 ## Second Props
 
-| Name | Description | Type | Options | Default |
-|----- |------------ |----- |-------- | ------- |
-| v-model | bind value | string / number |||
+| Name | Description | Type       | Default |
+|------|------------ |------------| ------- |
+| size | size of component | CommonType ||
+
+<!--
+ Make sure the component library exports the type `CommonType`
+ eg `export type CommonType = 'default' | 'small' | 'large'`
+
+ This way of writing is only valid for the web-types
+ -->
 
 ## Third Events
 
