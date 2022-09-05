@@ -65,6 +65,14 @@ export function isCommonType(type: string): boolean {
   return regExp.test(getTypeSymbol(type))
 }
 
+export function isEnumType(type: string): boolean {
+  return /^'\w*'$/.test(type) || /^"\w*"$/.test(type)
+}
+
+export function isUnionType(type: string): boolean {
+  return /(\||&)/.test(type)
+}
+
 export function arrayToRegExp(arr: string[], flags?: string): RegExp {
   return new RegExp(`^(${arr.join('|')})$`, flags)
 }
@@ -81,7 +89,7 @@ export function normalizeFile(file: string): string {
 }
 
 export function splitString(
-  options: Options,
+  options: Pick<Options, 'separator'>,
   str?: string,
 ): string[] | undefined {
   if (!str) return undefined
@@ -91,7 +99,7 @@ export function splitString(
 }
 
 export function getComponentsName(
-  options: Options,
+  options: Pick<Options, 'reComponentName'>,
   title = '',
   fileName: string,
   path: string,
@@ -103,7 +111,7 @@ export function getComponentsName(
 }
 
 export function getDocUrl(
-  options: Options,
+  options: Pick<Options, 'reDocUrl'>,
   fileName: string,
   header?: string,
   path?: string,
@@ -113,7 +121,7 @@ export function getDocUrl(
 }
 
 export function getVeturDescription(
-  options: Options,
+  options: Pick<Options, 'reVeturDescription'>,
   description?: string,
   defaultVal?: string,
   docUrl?: string,
@@ -137,7 +145,7 @@ export function getVeturDescription(
 }
 
 export function getWebTypesSource(
-  options: Options,
+  options: Pick<Options, 'reWebTypesSource'>,
   title = '',
   fileName: string,
   path: string,
@@ -149,14 +157,18 @@ export function getWebTypesSource(
 }
 
 function getType(type: string): string | BaseContribution {
+  const isEnum = isEnumType(type)
   const isPublicType = isCommonType(type)
   const symbol = getTypeSymbol(type)
+  const isUnion = isUnionType(symbol)
 
-  return isPublicType || !symbol ? type : { name: type, source: { symbol } }
+  return isEnum || isPublicType || !symbol || isUnion
+    ? type
+    : { name: type, source: { symbol } }
 }
 
 export function getWebTypesType(
-  options: Options,
+  options: Pick<Options, 'reWebTypesType' | 'separator'>,
   type?: string,
 ): undefined | Array<string | BaseContribution> {
   const { reWebTypesType } = options
@@ -175,6 +187,29 @@ export function getWebTypesType(
     }
 
     return types
+  } else {
+    return undefined
+  }
+}
+
+export function filterVeturOptions(
+  options: Pick<Options, 'separator'>,
+  type?: string,
+) {
+  const list = splitString(options, type)
+
+  if (list?.length) {
+    const result = []
+
+    for (let i = 0; i < list.length; i++) {
+      const item = list[i]
+      const isEnum = isEnumType(item)
+      const len = item.length
+
+      isEnum && result.push(item.slice(1, len - 1))
+    }
+
+    return result
   } else {
     return undefined
   }
