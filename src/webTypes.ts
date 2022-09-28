@@ -152,8 +152,10 @@ export function getWebTypes(options: Options, list: NormalizeData[]) {
       description,
       'doc-url': getDocUrl(options, fileName, title, path),
       props: checkArray(propsList),
-      events: checkArray(eventsList),
       slots: checkArray(slotsList),
+      js: checkArray(eventsList)
+        ? { events: checkArray(eventsList) }
+        : undefined,
     })
   }
 
