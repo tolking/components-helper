@@ -67,6 +67,7 @@ export interface Config {
   slots: string
   slotsName: string
   slotsDescription: string
+  slotsType: string
   slotsSubtags: string
   directives: string
   directivesName: string
@@ -244,7 +245,7 @@ export type NamePattern =
 export type Required = boolean
 export type NamePatternTemplate = [
   string | NamePatternTemplate | NamePattern,
-  ...(string | NamePatternTemplate | NamePattern)[]
+  ...(string | NamePatternTemplate | NamePattern)[],
 ]
 /**
  * A reference to an element in Web-Types model.

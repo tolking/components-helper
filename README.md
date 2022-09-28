@@ -73,6 +73,7 @@ then in package.json
 - [slots](#slots)
 - [slotsName](#slotsname)
 - [slotsDescription](#slotsdescription)
+- [slotsType](#slotsType)
 - [slotsSubtags](#slotssubtags)
 - [directives](#directives)
 - [directivesName](#directivesname)
@@ -89,7 +90,7 @@ then in package.json
 - Required: `true`
 - Type: `string`
 
-entry path, refer: [fast-glob](https://github.com/mrmlnc/fast-glob#pattern-syntax)
+Specify the entry directory. refer: [fast-glob](https://github.com/mrmlnc/fast-glob#pattern-syntax)
 
 for example:
   - `docs/*.md` -- matches all files in the docs
@@ -101,7 +102,7 @@ for example:
 - Required: `true`
 - Type: `string`
 
-outDir path, For example `lib`
+Specify the output directory. For example, `lib``
 
 ### name
 
@@ -203,119 +204,126 @@ name for web-types of the WebStorm
 - Type: `string` (**This is a regular string and ignores case.**)
 - Default: `props`
 
-name of props table. **other string in the header will be identified as sub-component**
+The title of the props table. **other string in the header will be identified as sub-component**
 
 ### propsName
 
 - Type: `string`
 - Default: `Name`
 
-name for the props header name
+The header name of the `Name` in the props table
 
 ### propsDescription
 
 - Type: `string`
 - Default: `Description`
 
-name for props header description
+The header name of the `Description` in the props table
 
 ### propsType
 
 - Type: `string`
 - Default: `Type`
 
-name for props header type
+The header name of the `Type` in the props table
 
 ### propsOptions
 
 - Type: `string`
 - Default: `Options`
 
-name for props header options
+The header name of the `Options` in the props table
 
 ### propsDefault
 
 - Type: `string`
 - Default: `Default`
 
-name for props header default
+The header name of the `Default` in the props table
 
 ### events
 
 - Type: `string` (**This is a regular string and ignores case.**)
 - Default: `events`
 
-name of events table. **other string in the header will be identified as sub-component**
+The title of the events table. **other string in the header will be identified as sub-component**
 
 ### eventsName
 
 - Type: `string`
 - Default: `Name`
 
-name for the events header name
+The header name of the `Name` in the events table
 
 ### eventsDescription
 
 - Type: `string`
 - Default: `Description`
 
-name for events header description
+The header name of the `Description` in the events table
 
 ### slots
 
 - Type: `string` (**This is a regular string and ignores case.**)
 - Default: `slots`
 
-name of slots table. **other string in the header will be identified as sub-component**
+The title of the slots table. **other string in the header will be identified as sub-component**
 
 ### slotsName
 
 - Type: `string`
 - Default: `Name`
 
-name for the slots header name
+The header name of the `Name` in the slots table
 
 ### slotsDescription
 
 - Type: `string`
 - Default: `Description`
 
-name for slots header description
+The header name of the `Description` in the slots table
+
+### slotsType
+
+- Type: `string`
+- Default: `Type`
+
+The header name of the `Type` in the slots table
 
 ### slotsSubtags
 
 - Type: `string`
 - Default: `Subtags`
 
-name for slots header subtags
+The header name of the `Subtags` in the slots table
 
 ### directives
 
 - Type: `string` (**This is a regular string and ignores case.**)
 - Default: `directives`
 
-name of directives table. **other string in the header will be identified as sub-component**
+The title of the directives table. **other string in the header will be identified as sub-component**
 
 ### directivesName
 
 - Type: `string`
 - Default: `Name`
 
-name for the directives header name
+The header name of the `Name` in the directives table
 
 ### directivesDescription
 
 - Type: `string`
 - Default: `Description`
 
-name for directives header description
+The header name of the `Description` in the directives table
 
 ### directivesType
 
 - Type: `string`
 - Default: `Type`
 
-name for directives header type
+The header name of the `Type` in the directives table
 
 ### titleRegExp
 
@@ -395,7 +403,7 @@ by default matches all tables, Optimize it through tableRegExp, For example:
 /#+\s+(`.*\s*Props|.*\s*Events|.*\s*Slots|.*\s*Directives`)\n+(`\|?.+\|.+`)\n\|?\s*:?-+:?\s*\|.+(`(\n\|?.+\|.+)+`)/g
 
 <div>
-### <code>Props | Events | Slots | Directives</code>
+### <code>Props / Events / Slots / Directives</code>
 <div><code>| header |</code></div>
 <div>| ------ |</div>
 <div><code>| column |</code></div>

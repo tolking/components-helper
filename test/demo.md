@@ -28,10 +28,10 @@ This is a description of the Demo component
 
 ## Slots
 
-| Name | Description | Subtags |
-| ---- | ----------- | ------- |
-| default | customize button group content | DemoItem / DemoGroup |
-| other | some other slots ||
+| Name | Description | Type | Subtags |
+| ---- | ----------- | ---- | ------- |
+| default | customize button group content || DemoItem / DemoGroup |
+| other | some other slots | { data: any } ||
 
 ## Directives
 
