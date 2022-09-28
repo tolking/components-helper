@@ -47,6 +47,7 @@ export function getWebTypes(options: Options, list: NormalizeData[]) {
     eventsDescription,
     slotsName,
     slotsDescription,
+    slotsType,
     directivesName,
     directivesType,
     directivesDescription,
@@ -142,6 +143,7 @@ export function getWebTypes(options: Options, list: NormalizeData[]) {
           name: _item,
           description: item[slotsDescription],
           'doc-url': getDocUrl(options, fileName, slots?.title, path),
+          type: item[slotsType],
         })
       }
     })

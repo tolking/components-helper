@@ -20,6 +20,7 @@ export const config: Config = {
   slots: 'slots',
   slotsName: 'Name',
   slotsDescription: 'Description',
+  slotsType: 'Type',
   slotsSubtags: 'Subtags',
   directives: 'directives',
   directivesName: 'Name',
