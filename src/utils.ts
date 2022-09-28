@@ -23,9 +23,11 @@ export function isCommonType(type: string): boolean {
     'null',
     'string',
     'number',
+    'bigint',
     'boolean',
     'object',
     'array',
+    'function(\\(.*\\))?',
     'String',
     'Number',
     'Boolean',
@@ -71,6 +73,14 @@ export function isEnumType(type: string): boolean {
 
 export function isUnionType(type: string): boolean {
   return /(\||&)/.test(type)
+}
+
+export function isTupleType(type: string): boolean {
+  return /^\[.*\]$/.test(type)
+}
+
+export function isArrowFunctionType(type: string): boolean {
+  return /^\(.*\)\s*=>\s*\w+/.test(type)
 }
 
 export function arrayToRegExp(arr: string[], flags?: string): RegExp {
@@ -158,11 +168,18 @@ export function getWebTypesSource(
 
 function getType(type: string): string | BaseContribution {
   const isEnum = isEnumType(type)
+  const isTuple = isTupleType(type)
+  const isArrowFunction = isArrowFunctionType(type)
   const isPublicType = isCommonType(type)
   const symbol = getTypeSymbol(type)
   const isUnion = isUnionType(symbol)
 
-  return isEnum || isPublicType || !symbol || isUnion
+  return isEnum ||
+    isTuple ||
+    isArrowFunction ||
+    isPublicType ||
+    !symbol ||
+    isUnion
     ? type
     : { name: type, source: { symbol } }
 }
