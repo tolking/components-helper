@@ -62,9 +62,14 @@ export function isCommonType(type: string): boolean {
     'InstanceType(<.*>)?',
     '(HTML.*)?Element',
   ]
+  const isEnum = isEnumType(type)
+  const isTuple = isTupleType(type)
+  const isObject = isObjectType(type)
+  const isArrowFunction = isArrowFunctionType(type)
   const regExp = arrayToRegExp(typeList)
+  const isPublicType = regExp.test(getTypeSymbol(type))
 
-  return regExp.test(getTypeSymbol(type))
+  return isEnum || isTuple || isObject || isArrowFunction || isPublicType
 }
 
 export function isEnumType(type: string): boolean {
@@ -77,6 +82,10 @@ export function isUnionType(type: string): boolean {
 
 export function isTupleType(type: string): boolean {
   return /^\[.*\]$/.test(type)
+}
+
+export function isObjectType(type: string) {
+  return /^\{.*\}$/.test(type)
 }
 
 export function isArrowFunctionType(type: string): boolean {
@@ -167,19 +176,11 @@ export function getWebTypesSource(
 }
 
 function getType(type: string): string | BaseContribution {
-  const isEnum = isEnumType(type)
-  const isTuple = isTupleType(type)
-  const isArrowFunction = isArrowFunctionType(type)
   const isPublicType = isCommonType(type)
   const symbol = getTypeSymbol(type)
   const isUnion = isUnionType(symbol)
 
-  return isEnum ||
-    isTuple ||
-    isArrowFunction ||
-    isPublicType ||
-    !symbol ||
-    isUnion
+  return isPublicType || !symbol || isUnion
     ? type
     : { name: type, source: { symbol } }
 }
