@@ -1,5 +1,13 @@
 # Changelog
 
+### 2.1.3
+
+feat
+
+- compatible with more types
+- move events to js/events
+- add config slotsType (#36)
+
 ### 2.1.2
 
 feat
