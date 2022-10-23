@@ -88,7 +88,7 @@ then in package.json
 ### entry
 
 - Required: `true`
-- Type: `string`
+- Type: `string` | `string[]`
 
 Specify the entry directory. refer: [fast-glob](https://github.com/mrmlnc/fast-glob#pattern-syntax)
 
@@ -96,6 +96,12 @@ for example:
   - `docs/*.md` -- matches all files in the docs
   - `docs/(a|b).md` -- matches files `a.md` and `b.md`
   - `docs/!(a|b).md` -- matches files except for `a.md` and `b.md`
+
+### fastGlobConfig
+
+- Type: `object`
+
+The config of [fast-glob](https://github.com/mrmlnc/fast-glob#options-3)
 
 ### outDir
 
