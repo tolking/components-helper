@@ -116,7 +116,11 @@ export function getWebTypes(options: Options, list: NormalizeData[]) {
           type: checkArray(getWebTypesType(options, item[propsType])),
           default: item[propsDefault],
           'attribute-value': checkArray(_optionsList)
-            ? { type: 'enum' }
+            ? {
+                type: /^string$/i.test(item[propsType] || '')
+                  ? 'enum'
+                  : 'of-match',
+              }
             : undefined,
           values: checkArray(_optionsList?.map((name) => ({ name }))),
         })
