@@ -16,7 +16,7 @@ export function main(options = {} as InstallOptions) {
   if (!options.version) console.warn('missing property "version"')
 
   const _options: Options = Object.assign(config, options)
-  const files: string[] = fg.sync(_options.entry)
+  const files: string[] = fg.sync(_options.entry, _options.fastGlobConfig)
   const data = files.map((path) => {
     const fileContent = read(path)
     const parseContent = parse(_options, fileContent)

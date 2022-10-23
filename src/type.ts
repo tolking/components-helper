@@ -1,3 +1,5 @@
+import type { Options as FastGlobConfig } from 'fast-glob'
+
 export type ReComponentName = (
   title: string,
   fileName: string,
@@ -34,7 +36,8 @@ export type ReWebTypesType = (
 ) => undefined | string | BaseContribution
 
 export interface OptionsConfig {
-  entry: string
+  entry: string | string[]
+  fastGlobConfig?: FastGlobConfig
   outDir: string
   name: string
   version: string
