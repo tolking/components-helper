@@ -47,6 +47,7 @@ then in package.json
 <summary>TOC</summary>
 
 - [entry (required)](#entry)
+- [fastGlobConfig](#fastglobconfig)
 - [outDir (required)](#outdir)
 - [name (required)](#name)
 - [version (required)](#version)
