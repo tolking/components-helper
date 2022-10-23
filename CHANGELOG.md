@@ -1,5 +1,15 @@
 # Changelog
 
+### 2.1.4
+
+feat
+
+- add fastGlobConfig for fast-glob (#39)
+
+fix
+
+- the attribute-value should change with type (#38)
+
 ### 2.1.3
 
 feat
