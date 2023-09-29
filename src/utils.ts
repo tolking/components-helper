@@ -24,6 +24,7 @@ export function isCommonType(type: string): boolean {
     'string',
     'number',
     'bigint',
+    '\\d+',
     'boolean',
     'object',
     'array',
