@@ -10,13 +10,7 @@ export function write(
   const path = resolve(options.outDir, options[type])
   const buffer = JSON.stringify(data, null, options.space)
 
-  writeFileRecursive(path, buffer)
-}
-
-function writeFileRecursive(path: string, buffer: string) {
-  const lastPath = path.substring(0, path.lastIndexOf('/'))
-
-  mkdir(lastPath, { recursive: true }, () => {
+  mkdir(resolve(options.outDir), { recursive: true }, () => {
     writeFileSync(path, buffer)
   })
 }
