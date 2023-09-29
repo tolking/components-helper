@@ -20,6 +20,7 @@ This is a description of the Third component
 |------|-------------|------|---------|
 | size | size of component | 'default' / 'small' / 'large' | default |
 | type | type of component | 'primary' \| 'success' \| 'warning' \| 'danger' ||
+| count | count number | 1 / 2 / 3 / 4 / 5 | 2 |
 
 <!--
  Supports the use of separator `/` to split the type, and is compatible with the `\|` split type
