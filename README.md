@@ -1,3 +1,13 @@
+:warning: This library is no longer maintained.
+
+With the [WebStorm](https://blog.jetbrains.com/webstorm/2023/05/webstorm-2023-2-eap2/#volar_support_for_vue) support of [Volar](https://github.com/vuejs/language-tools#readme), you may no longer need this library.
+
+It is more recommended that you use Volar's code prompt by improving the type declaration.
+
+If you still need this library, you can continue to use it, but this library will no longer have new feature updates.
+
+---
+
 # components-helper
 
 > Based on the documents to provide code prompt files for vue component library
