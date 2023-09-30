@@ -1,5 +1,12 @@
 # Changelog
 
+### 2.1.5
+
+fix
+
+- optimize file writing (#42)
+- incompatible with pure number types (#43)
+
 ### 2.1.4
 
 feat
