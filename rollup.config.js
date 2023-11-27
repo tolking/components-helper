@@ -2,7 +2,7 @@ import ts from 'rollup-plugin-typescript2'
 
 const commonConf = {
   input: './src/index.ts',
-  external: ['fast-glob', 'fs', 'path'],
+  external: ['fast-glob'],
   plugins: [
     ts({
       extensions: ['.ts'],
@@ -13,13 +13,13 @@ const commonConf = {
 
 const list = [
   {
-    file: 'lib/index.es.js',
+    file: 'lib/index.js',
     format: 'es',
     exports: 'named',
     compact: true,
   },
   {
-    file: 'lib/index.js',
+    file: 'lib/index.cjs',
     format: 'cjs',
     exports: 'named',
     compact: true,

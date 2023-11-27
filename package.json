@@ -2,13 +2,14 @@
   "name": "components-helper",
   "version": "2.1.5",
   "description": "Based on the docs to provide code prompt files for vue component library",
-  "main": "lib/index.js",
-  "module": "lib/index.es.js",
+  "type": "module",
+  "main": "lib/index.cjs",
+  "module": "lib/index.js",
   "types": "lib/index.d.ts",
   "exports": {
     ".": {
-      "import": "./lib/index.es.js",
-      "require": "./lib/index.js"
+      "import": "./lib/index.js",
+      "require": "./lib/index.cjs"
     }
   },
   "scripts": {
@@ -44,10 +45,10 @@
   },
   "homepage": "https://github.com/tolking/components-helper#readme",
   "engines": {
-    "node": ">15.0.0"
+    "node": ">=16.0.0"
   },
   "dependencies": {
-    "fast-glob": "^3.2.11"
+    "fast-glob": "^3.3.2"
   },
   "devDependencies": {
     "@types/node": "^18.0.6",
