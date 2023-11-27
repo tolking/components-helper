@@ -1,5 +1,5 @@
-import { resolve } from 'path'
-import { mkdir, writeFileSync } from 'fs'
+import { resolve } from 'node:path'
+import { mkdir, writeFileSync } from 'node:fs'
 import type { Options, Tags, Props, WebTypes } from './type'
 
 export function write(
