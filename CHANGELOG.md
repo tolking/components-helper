@@ -1,5 +1,18 @@
 # Changelog
 
+### 2.2.0
+
+berak change
+
+- change the type to module (#45)
+
+``` diff
+- index.js
++ index.cjs
+- index.es.js
++ index.js
+```
+
 ### 2.1.5
 
 fix
